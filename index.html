@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ErrorKuboomHub</title>
+
+<style>
+:root {
+    --green: #00ff66;
+    --dark: #0b0f0c;
+    --card: #121a14;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: var(--dark);
+    color: white;
+}
+
+/* NAVBAR */
+nav {
+    background: #0f1511;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--green);
+}
+
+nav h1 {
+    color: var(--green);
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: var(--green);
+}
+
+/* HEADER (NO IMAGE) */
+header {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid var(--green);
+}
+
+header h2 {
+    font-size: 48px;
+    letter-spacing: 6px;
+}
+
+/* SECTIONS */
+section {
+    padding: 40px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.section-title {
+    color: var(--green);
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--green);
+    padding-bottom: 5px;
+}
+
+/* NEWS */
+.news-card {
+    background: var(--card);
+    padding: 20px;
+    margin-bottom: 15px;
+    border-left: 4px solid var(--green);
+    transition: 0.3s;
+}
+
+.news-card:hover {
+    transform: translateX(8px);
+}
+
+/* CODES */
+.code-card {
+    background: var(--card);
+    padding: 20px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.code-card:hover {
+    transform: scale(1.02);
+}
+
+.code {
+    font-size: 18px;
+    color: var(--green);
+    letter-spacing: 2px;
+}
+
+.status {
+    font-size: 14px;
+    color: #7CFFAA;
+}
+
+button {
+    background: var(--green);
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 20px;
+    border-top: 2px solid var(--green);
+    margin-top: 40px;
+    opacity: 0.7;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <h1>ErrorKuboomHub</h1>
+    <div>
+        <a href="#news">News</a>
+        <a href="#codes">Codes</a>
+    </div>
+</nav>
+
+<header>
+    <h2>HOME</h2>
+</header>
+
+<section id="news">
+    <h3 class="section-title">Latest Kuboom News</h3>
+
+    <div class="news-card">
+        🟢 Multiple active promo codes available right now!
+    </div>
+
+    <div class="news-card">
+        🔥 Stay tuned for upcoming Kuboom updates.
+    </div>
+</section>
+
+<section id="codes">
+    <h3 class="section-title">Active Promo Codes</h3>
+
+    <div class="code-card">
+        <div>
+            <div class="code">KUBOOM2026</div>
+            <div class="status">STATUS: ACTIVE</div>
+        </div>
+        <button onclick="copyCode('KUBOOM2026')">Copy</button>
+    </div>
+
+    <div class="code-card">
+        <div>
+            <div class="code">KUBOOM!</div>
+            <div class="status">STATUS: ACTIVE</div>
+        </div>
+        <button onclick="copyCode('KUBOOM!')">Copy</button>
+    </div>
+
+    <div class="code-card">
+        <div>
+            <div class="code">KUBOOM*</div>
+            <div class="status">STATUS: ACTIVE</div>
+        </div>
+        <button onclick="copyCode('KUBOOM*')">Copy</button>
+    </div>
+
+    <div class="code-card">
+        <div>
+            <div class="code">ALBATYA</div>
+            <div class="status">STATUS: ACTIVE</div>
+        </div>
+        <button onclick="copyCode('ALBATYA')">Copy</button>
+    </div>
+
+    <div class="code-card">
+        <div>
+            <div class="code">UPDATE</div>
+            <div class="status">STATUS: ACTIVE</div>
+        </div>
+        <button onclick="copyCode('UPDATE')">Copy</button>
+    </div>
+
+    <div class="code-card">
+        <div>
+            <div class="code">UPDATE1</div>
+            <div class="status">STATUS: ACTIVE</div>
+        </div>
+        <button onclick="copyCode('UPDATE1')">Copy</button>
+    </div>
+
+    <div class="code-card">
+        <div>
+            <div class="code">8YEARS</div>
+            <div class="status">STATUS: ACTIVE</div>
+        </div>
+        <button onclick="copyCode('8YEARS')">Copy</button>
+    </div>
+</section>
+
+<footer>
+    ErrorKuboomHub — Fan-made Kuboom website
+</footer>
+
+<script>
+function copyCode(text) {
+    navigator.clipboard.writeText(text);
+    alert("Copied code: " + text);
+}
+</script>
+
+</body>
+</html>
