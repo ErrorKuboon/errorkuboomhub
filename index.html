@@ -44,6 +44,7 @@ section { padding:50px 20px; max-width:1100px; margin:auto;}
 .status { font-size:14px; margin-top:5px;}
 .status.active { color:#7CFFAA; text-shadow:0 0 5px var(--main-color);}
 .status.expired { color:red; text-shadow:0 0 5px red;}
+.code-card.expired { cursor:default; opacity:0.6;}
 button { background: var(--main-color); border:none; padding:10px 20px; cursor:pointer; border-radius:8px; font-weight:bold; text-shadow:0 0 5px var(--main-color); transition: all 0.3s ease;}
 button:hover { transform:scale(1.1); box-shadow:0 0 15px var(--main-color);}
 
@@ -115,9 +116,9 @@ footer { text-align:center; padding:25px; border-top:3px solid var(--main-color)
 <div class="code-card"><div><div class="code">8YEARS</div><div class="status active">STATUS: ACTIVE</div></div><button onclick="copyCode('8YEARS')">Copy</button></div>
 
 <h3 class="section-title">Expired Codes</h3>
-<div class="code-card"><div><div class="code">ALBATYA</div><div class="status expired">STATUS: EXPIRED</div></div><button onclick="copyCode('ALBATYA')">Copy</button></div>
-<div class="code-card"><div class="code">RUTUL</div><div class="status expired">STATUS: EXPIRED</div></div><button onclick="copyCode('RUTUL')">Copy</button></div>
-<div class="code-card"><div class="code">PLSBXOU</div><div class="status expired">STATUS: EXPIRED</div></div><button onclick="copyCode('PLSBXOU')">Copy</button></div>
+<div class="code-card expired"><div><div class="code">ALBATYA</div><div class="status expired">STATUS: EXPIRED</div></div></div>
+<div class="code-card expired"><div><div class="code">RUTUL</div><div class="status expired">STATUS: EXPIRED</div></div></div>
+<div class="code-card expired"><div><div class="code">PLSBXOU</div><div class="status expired">STATUS: EXPIRED</div></div></div>
 </section>
 
 <section id="weaponsTab">
@@ -148,7 +149,17 @@ ur:{navNews:"خبریں", navCodes:"کوڈ", navWeapons:"ہتھیار", header:"
 pt:{navNews:"Notícias", navCodes:"Códigos", navWeapons:"Armas", header:"INÍCIO", newsTitle:"Últimas notícias do Kuboom", news1:"🔥 Junte-se ao servidor oficial do Kuboom para ajuda e reportar bugs", footer:"Feito com ❤️ por errorkuboom", copyAlert:"Código copiado: "}
 };
 
-function setLanguage(lang){const t=texts[lang]; document.getElementById('navNews').innerText=t.navNews; document.getElementById('navCodes').innerText=t.navCodes; document.getElementById('weaponsTab').innerText=t.navWeapons; document.getElementById('headerText').innerText=t.header; document.getElementById('newsTitle').innerText=t.newsTitle; document.getElementById('news1').innerHTML=t.news1.replace(/(https?:\/\/[^\s]+)/g,'<a href="$1" target="_blank" style="color: var(--main-color); text-decoration: underline;">$1</a>'); document.getElementById('footerText').innerText=t.footer; window.copyCode=function(text){navigator.clipboard.writeText(text); alert(t.copyAlert + text);}}
+function setLanguage(lang){
+    const t=texts[lang]; 
+    document.getElementById('navNews').innerText=t.navNews; 
+    document.getElementById('navCodes').innerText=t.navCodes; 
+    document.getElementById('weaponsTab').innerText=t.navWeapons; 
+    document.getElementById('headerText').innerText=t.header; 
+    document.getElementById('newsTitle').innerText=t.newsTitle; 
+    document.getElementById('news1').innerHTML=t.news1.replace(/(https?:\/\/[^\s]+)/g,'<a href="$1" target="_blank" style="color: var(--main-color); text-decoration: underline;">$1</a>'); 
+    document.getElementById('footerText').innerText=t.footer; 
+    window.copyCode=function(text){navigator.clipboard.writeText(text); alert(t.copyAlert + text);}
+}
 setLanguage('en');
 
 function toggleSlider(type){
