@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ErrorKuboomHub</title>
 
 <style>
@@ -16,6 +17,10 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
+}
+
+html, body {
+    overflow-x: hidden;
 }
 
 body {
@@ -59,7 +64,7 @@ nav select {
     cursor: pointer;
 }
 
-/* HEADER (NO IMAGE) */
+/* HEADER */
 header {
     height: 200px;
     display: flex;
@@ -69,8 +74,8 @@ header {
 }
 
 header h2 {
-    font-size: 48px;
-    letter-spacing: 6px;
+    font-size: clamp(28px, 6vw, 48px);
+    letter-spacing: 4px;
 }
 
 /* SECTIONS */
@@ -146,6 +151,42 @@ footer {
     border-top: 2px solid var(--green);
     margin-top: 40px;
     opacity: 0.7;
+}
+
+/* MOBILE FIXES */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+        text-align: center;
+    }
+
+    nav div {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    nav a,
+    nav select {
+        margin-left: 0;
+    }
+
+    section {
+        padding: 20px;
+    }
+
+    .code-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    button {
+        width: 100%;
+    }
 }
 </style>
 </head>
@@ -247,13 +288,11 @@ footer {
 </footer>
 
 <script>
-// Default copy function
 function copyCode(text) {
     navigator.clipboard.writeText(text);
     alert("Copied code: " + text);
 }
 
-// Language translations
 const texts = {
     en: {
         navNews: "News",
@@ -301,7 +340,6 @@ const texts = {
     }
 };
 
-// Function to set language
 function setLanguage(lang) {
     document.getElementById('navNews').innerText = texts[lang].navNews;
     document.getElementById('navCodes').innerText = texts[lang].navCodes;
@@ -312,14 +350,12 @@ function setLanguage(lang) {
     document.getElementById('codesTitle').innerText = texts[lang].codesTitle;
     document.getElementById('footerText').innerText = texts[lang].footer;
 
-    // Update copyCode alert
     window.copyCode = function(text) {
         navigator.clipboard.writeText(text);
         alert(texts[lang].copyAlert + text);
     }
 }
 
-// Set default language to English
 setLanguage('en');
 </script>
 
