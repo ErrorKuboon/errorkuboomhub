@@ -6,19 +6,23 @@
 
 <style>
 :root {
-    /* Default GREEN theme */
+    /* DARK MODE default */
     --primary: #00ff66;
     --background: #0b0f0c;
     --card: #121a14;
     --text: white;
+    --button-bg: var(--primary);
+    --button-text: var(--background);
 }
 
-/* WHITE & BLACK theme variables */
-[data-theme="bw"] {
-    --primary: #000000; /* black primary elements like borders */
-    --background: #ffffff;
-    --card: #f0f0f0;
+/* LIGHT MODE */
+[data-theme="light"] {
+    --primary: #007f00;
+    --background: #f5f5f5;
+    --card: #e0e0e0;
     --text: #000000;
+    --button-bg: #ffffff;
+    --button-text: #000000;
 }
 
 * {
@@ -58,13 +62,19 @@ nav a:hover {
     color: var(--primary);
 }
 
+nav .controls {
+    display: flex;
+    align-items: center;
+}
+
 nav select, nav button {
-    margin-left: 20px;
+    margin-left: 15px;
     padding: 5px 10px;
     border-radius: 5px;
     border: none;
     cursor: pointer;
     font-weight: bold;
+    transition: 0.2s;
 }
 
 nav select {
@@ -73,8 +83,45 @@ nav select {
 }
 
 nav button {
-    background: var(--primary);
+    background: var(--button-bg);
+    color: var(--button-text);
+}
+
+/* SETTINGS ICON */
+nav .settings {
+    position: relative;
+}
+
+nav .settings button {
+    font-size: 18px;
+    padding: 5px 8px;
+}
+
+nav .theme-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 35px;
+    background: var(--card);
+    border: 1px solid var(--primary);
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 10;
+}
+
+nav .theme-dropdown button {
+    width: 100%;
+    text-align: left;
+    padding: 8px 15px;
+    background: var(--card);
     color: var(--text);
+    border: none;
+    cursor: pointer;
+}
+
+nav .theme-dropdown button:hover {
+    background: var(--primary);
+    color: var(--background);
 }
 
 /* HEADER */
@@ -145,10 +192,8 @@ section {
 }
 
 button.copy-btn {
-    background: var(--primary);
-    border: none;
-    padding: 8px 15px;
-    cursor: pointer;
+    background: var(--button-bg);
+    color: var(--button-text);
     border-radius: 5px;
     font-weight: bold;
 }
@@ -172,7 +217,7 @@ footer {
 
 <nav>
     <h1>ErrorKuboomHub</h1>
-    <div>
+    <div class="controls">
         <a href="#news" id="navNews">News</a>
         <a href="#codes" id="navCodes">Codes</a>
         <select id="languageSelect" onchange="setLanguage(this.value)">
@@ -181,7 +226,13 @@ footer {
             <option value="ru">Русский</option>
             <option value="hi">हिंदी</option>
         </select>
-        <button onclick="toggleTheme()">Toggle BW Theme</button>
+        <div class="settings">
+            <button onclick="toggleDropdown()">⚙️</button>
+            <div class="theme-dropdown" id="themeDropdown">
+                <button onclick="setTheme('dark')">Dark Mode</button>
+                <button onclick="setTheme('light')">Light Mode</button>
+            </div>
+        </div>
     </div>
 </nav>
 
@@ -266,7 +317,7 @@ footer {
 </footer>
 
 <script>
-// Default copy function
+// Copy code function
 function copyCode(text) {
     navigator.clipboard.writeText(text);
     alert("Copied code: " + text);
@@ -274,53 +325,13 @@ function copyCode(text) {
 
 // Language translations
 const texts = {
-    en: {
-        navNews: "News",
-        navCodes: "Codes",
-        header: "HOME",
-        newsTitle: "Latest Kuboom News",
-        news1: "🟢 Multiple active promo codes available right now!",
-        news2: "🔥 Stay tuned for upcoming Kuboom updates.",
-        codesTitle: "Active Promo Codes",
-        footer: "ErrorKuboomHub — Fan-made Kuboom website",
-        copyAlert: "Copied code: "
-    },
-    es: {
-        navNews: "Noticias",
-        navCodes: "Códigos",
-        header: "INICIO",
-        newsTitle: "Últimas Noticias de Kuboom",
-        news1: "🟢 ¡Múltiples códigos promocionales activos ahora mismo!",
-        news2: "🔥 Mantente atento a las próximas actualizaciones de Kuboom.",
-        codesTitle: "Códigos Promocionales Activos",
-        footer: "ErrorKuboomHub — Sitio de fans de Kuboom",
-        copyAlert: "Código copiado: "
-    },
-    ru: {
-        navNews: "Новости",
-        navCodes: "Коды",
-        header: "ДОМОЙ",
-        newsTitle: "Последние новости Kuboom",
-        news1: "🟢 Сейчас доступно несколько активных промокодов!",
-        news2: "🔥 Следите за предстоящими обновлениями Kuboom.",
-        codesTitle: "Активные промокоды",
-        footer: "ErrorKuboomHub — фан-сайт Kuboom",
-        copyAlert: "Скопировано: "
-    },
-    hi: {
-        navNews: "समाचार",
-        navCodes: "कोड",
-        header: "मुखपृष्ठ",
-        newsTitle: "हाल की Kuboom समाचार",
-        news1: "🟢 अभी कई सक्रिय प्रमो कोड उपलब्ध हैं!",
-        news2: "🔥 आगामी Kuboom अपडेट के लिए बने रहें।",
-        codesTitle: "सक्रिय प्रोमो कोड",
-        footer: "ErrorKuboomHub — फैन-निर्मित Kuboom वेबसाइट",
-        copyAlert: "कोड कॉपी किया गया: "
-    }
+    en: { navNews: "News", navCodes: "Codes", header: "HOME", newsTitle: "Latest Kuboom News", news1: "🟢 Multiple active promo codes available right now!", news2: "🔥 Stay tuned for upcoming Kuboom updates.", codesTitle: "Active Promo Codes", footer: "ErrorKuboomHub — Fan-made Kuboom website", copyAlert: "Copied code: " },
+    es: { navNews: "Noticias", navCodes: "Códigos", header: "INICIO", newsTitle: "Últimas Noticias de Kuboom", news1: "🟢 ¡Múltiples códigos promocionales activos ahora mismo!", news2: "🔥 Mantente atento a las próximas actualizaciones de Kuboom.", codesTitle: "Códigos Promocionales Activos", footer: "ErrorKuboomHub — Sitio de fans de Kuboom", copyAlert: "Código copiado: " },
+    ru: { navNews: "Новости", navCodes: "Коды", header: "ДОМОЙ", newsTitle: "Последние новости Kuboom", news1: "🟢 Сейчас доступно несколько активных промокодов!", news2: "🔥 Следите за предстоящими обновлениями Kuboom.", codesTitle: "Активные промокоды", footer: "ErrorKuboomHub — фан-сайт Kuboom", copyAlert: "Скопировано: " },
+    hi: { navNews: "समाचार", navCodes: "कोड", header: "मुखपृष्ठ", newsTitle: "हाल की Kuboom समाचार", news1: "🟢 अभी कई सक्रिय प्रमो कोड उपलब्ध हैं!", news2: "🔥 आगामी Kuboom अपडेट के लिए बने रहें।", codesTitle: "सक्रिय प्रोमो कोड", footer: "ErrorKuboomHub — फैन-निर्मित Kuboom वेबसाइट", copyAlert: "कोड कॉपी किया गया: " }
 };
 
-// Function to set language
+// Set language
 function setLanguage(lang) {
     document.getElementById('navNews').innerText = texts[lang].navNews;
     document.getElementById('navCodes').innerText = texts[lang].navCodes;
@@ -330,8 +341,6 @@ function setLanguage(lang) {
     document.getElementById('news2').innerText = texts[lang].news2;
     document.getElementById('codesTitle').innerText = texts[lang].codesTitle;
     document.getElementById('footerText').innerText = texts[lang].footer;
-
-    // Update copyCode alert
     window.copyCode = function(text) {
         navigator.clipboard.writeText(text);
         alert(texts[lang].copyAlert + text);
@@ -339,15 +348,21 @@ function setLanguage(lang) {
 }
 
 // Theme toggle
-function toggleTheme() {
-    if (document.body.getAttribute('data-theme') === 'bw') {
-        document.body.removeAttribute('data-theme'); // back to green
-    } else {
-        document.body.setAttribute('data-theme', 'bw'); // switch to black & white
-    }
+function toggleDropdown() {
+    const dd = document.getElementById('themeDropdown');
+    dd.style.display = dd.style.display === 'block' ? 'none' : 'block';
 }
 
-// Set default language to English
+function setTheme(theme) {
+    if (theme === 'light') {
+        document.body.setAttribute('data-theme', 'light');
+    } else {
+        document.body.removeAttribute('data-theme');
+    }
+    toggleDropdown(); // hide dropdown after selecting
+}
+
+// Set default language
 setLanguage('en');
 </script>
 
