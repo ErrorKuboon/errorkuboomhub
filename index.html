@@ -50,17 +50,15 @@ button:hover { transform:scale(1.1); box-shadow:0 0 15px var(--main-color);}
 /* FOOTER */
 footer { text-align:center; padding:25px; border-top:3px solid var(--main-color); margin-top:40px; opacity:0.8; font-size:14px;}
 
-/* SLIDERS */
-.slider { position:fixed; right:20px; width:200px; background:#121212; border:3px solid var(--main-color); border-radius:12px; padding:15px; transition: transform 0.4s, opacity 0.4s; z-index:999; opacity:0; transform:translateY(20px); pointer-events:none;}
-.slider.open { opacity:1; transform:translateY(0); pointer-events:auto;}
+/* SLIDERS UNDER "COMING SOON!" */
+.slider { width:220px; background:#121212; border:3px solid var(--main-color); border-radius:12px; padding:12px; margin-top:15px; transition: max-height 0.4s ease; overflow:hidden; max-height:0;}
+.slider.open { max-height:120px; }
 .slider h3 { color: var(--main-color); margin-bottom:10px; text-align:center; font-size:16px;}
 .slider a { display:block; background: var(--main-color); color:#000; text-align:center; padding:8px 0; border-radius:8px; margin-top:10px; text-decoration:none; font-weight:bold; transition:0.3s; }
 .slider a:hover { background:#fff; }
 
 /* BUTTONS */
-#discordButton, #youtubeButton { position:fixed; right:20px; width:120px; padding:10px; border-radius:12px; font-weight:bold; text-align:center; cursor:pointer; z-index:1000;}
-#discordButton { bottom:20px; background:#7289da; color:#fff; box-shadow:0 0 8px #7289da; }
-#youtubeButton { bottom:50px; background:#ff0000; color:#fff; box-shadow:0 0 8px #ff0000;}
+#discordButton, #youtubeButton { background:var(--main-color); color:#000; border:none; border-radius:10px; padding:8px 12px; font-weight:bold; cursor:pointer; margin-top:10px; display:inline-block;}
 #discordButton:hover,#youtubeButton:hover{transform:scale(1.05);}
 
 /* MOBILE */
@@ -71,7 +69,7 @@ footer { text-align:center; padding:25px; border-top:3px solid var(--main-color)
     section{padding:30px 15px;}
     .code-card{flex-direction:column; align-items:flex-start; gap:10px;}
     button{width:100%;}
-    #youtubeButton{bottom:50px;}
+    #discordButton,#youtubeButton{width:48%; margin-top:10px;}
 }
 </style>
 </head>
@@ -118,24 +116,24 @@ footer { text-align:center; padding:25px; border-top:3px solid var(--main-color)
 
 <h3 class="section-title">Expired Codes</h3>
 <div class="code-card"><div><div class="code">ALBATYA</div><div class="status expired">STATUS: EXPIRED</div></div><button onclick="copyCode('ALBATYA')">Copy</button></div>
-<div class="code-card"><div><div class="code">RUTUL</div><div class="status expired">STATUS: EXPIRED</div></div><button onclick="copyCode('RUTUL')">Copy</button></div>
-<div class="code-card"><div><div class="code">PLSBXOU</div><div class="status expired">STATUS: EXPIRED</div></div><button onclick="copyCode('PLSBXOU')">Copy</button></div>
+<div class="code-card"><div class="code">RUTUL</div><div class="status expired">STATUS: EXPIRED</div></div><button onclick="copyCode('RUTUL')">Copy</button></div>
+<div class="code-card"><div class="code">PLSBXOU</div><div class="status expired">STATUS: EXPIRED</div></div><button onclick="copyCode('PLSBXOU')">Copy</button></div>
 </section>
 
 <section id="weaponsTab">
 <h3 class="section-title">Weapons</h3>
 <div class="news-card">Coming Soon!</div>
+
+<!-- Sliders under Coming Soon -->
+<div>
+<button id="discordButton" onclick="toggleSlider('discord')">Join Discord</button>
+<button id="youtubeButton" onclick="toggleSlider('youtube')">My YouTube</button>
+<div id="discordSlider" class="slider"><h3>Discord</h3><a href="https://discord.gg/vmNh8Sj6" target="_blank">🔥 Join Discord</a></div>
+<div id="youtubeSlider" class="slider"><h3>YouTube</h3><a href="https://www.youtube.com/@3rrorKuboom" target="_blank">🔥 My YouTube</a></div>
+</div>
 </section>
 
 <footer id="footerText">Made with ❤️ by errorkuboom</footer>
-
-<!-- Buttons -->
-<button id="discordButton" onclick="toggleSlider('discord')">Join Discord</button>
-<button id="youtubeButton" onclick="toggleSlider('youtube')">My YouTube</button>
-
-<!-- Sliders -->
-<div id="discordSlider" class="slider"><h3>Discord</h3><div>Discord: errorkuboom</div></div>
-<div id="youtubeSlider" class="slider"><h3>YouTube</h3><a href="https://www.youtube.com/@3rrorKuboom" target="_blank">🔥 My YouTube</a></div>
 
 <script>
 function copyCode(text){navigator.clipboard.writeText(text); alert("Copied code: "+text);}
