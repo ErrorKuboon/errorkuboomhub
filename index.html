@@ -1,192 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ErrorKuboomHub</title>
+    <meta charset="UTF-8">
+    <!-- THIS FIXES MOBILE ZOOM -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-:root {
-    --green: #00ff66;
-    --dark: #0b0f0c;
-    --card: #121a14;
-}
+    <title>ErrorKuboomHub</title>
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0b0b0b;
+            color: white;
+        }
 
-body {
-    background: var(--dark);
-    color: white;
-}
+        header {
+            text-align: center;
+            padding: 20px;
+            background: #111;
+        }
 
-/* NAVBAR */
-nav {
-    background: #0f1511;
-    padding: 15px 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid var(--green);
-}
+        h1 {
+            margin: 0;
+            color: #00aaff;
+        }
 
-nav h1 {
-    color: var(--green);
-}
+        section {
+            padding: 20px;
+        }
 
-nav a {
-    color: white;
-    text-decoration: none;
-    margin-left: 15px;
-}
+        .section-title {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
 
-nav a:hover {
-    color: var(--green);
-}
+        /* NEWS */
+        .news-card {
+            background: #151515;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px auto;
+            max-width: 600px;
+            text-align: center;
+        }
 
-/* HEADER */
-header {
-    padding: 40px 20px;
-    text-align: center;
-    border-bottom: 2px solid var(--green);
-}
+        .news-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
 
-header h2 {
-    font-size: clamp(1.8rem, 5vw, 3rem);
-}
+        /* CODES */
+        .code-card {
+            background: #151515;
+            border-radius: 10px;
+            padding: 12px;
+            margin: 10px auto;
+            max-width: 600px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-/* SECTIONS */
-section {
-    padding: 30px 20px;
-    max-width: 1100px;
-    margin: auto;
-}
+        .code {
+            font-weight: bold;
+            font-size: 18px;
+        }
 
-.section-title {
-    color: var(--green);
-    margin-bottom: 20px;
-    border-bottom: 2px solid var(--green);
-}
+        .status {
+            font-size: 13px;
+            color: #00ff7f;
+        }
 
-/* NEWS */
-.news-card {
-    background: var(--card);
-    padding: 20px;
-    margin-bottom: 20px;
-    border-left: 4px solid var(--green);
-}
+        button {
+            background: #00aaff;
+            color: black;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
 
-.news-highlight {
-    border: 2px solid var(--green);
-    text-align: center;
-}
-
-.news-image {
-    width: 100%;
-    max-width: 600px;
-    display: block;
-    margin: 10px auto;
-    border-radius: 8px;
-}
-
-.platform {
-    color: var(--green);
-    font-weight: bold;
-}
-
-/* CODES */
-.code-card {
-    background: var(--card);
-    padding: 15px 20px;
-    margin-bottom: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.code {
-    color: var(--green);
-    letter-spacing: 1px;
-}
-
-.status {
-    font-size: 0.85rem;
-    color: #7CFFAA;
-}
-
-button {
-    background: var(--green);
-    border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-/* FOOTER */
-footer {
-    text-align: center;
-    padding: 20px;
-    border-top: 2px solid var(--green);
-    margin-top: 40px;
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-    .code-card {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .code-card button {
-        align-self: flex-end;
-        margin-top: 10px;
-    }
-}
-</style>
+        button:hover {
+            background: #0088cc;
+        }
+    </style>
 </head>
 
 <body>
 
-<nav>
-    <h1>ErrorKuboomHub</h1>
-    <div>
-        <a href="#news">News</a>
-        <a href="#codes">Codes</a>
-    </div>
-</nav>
-
 <header>
-    <h2>HOME</h2>
+    <h1>ErrorKuboomHub</h1>
+    <p>Active Kuboom Promo Codes</p>
 </header>
 
+<!-- NEWS SECTION -->
 <section id="news">
-    <h3 class="section-title">Latest Kuboom News</h3>
+    <h2 class="section-title">Latest News</h2>
 
-    <div class="news-card news-highlight">
-        <img src="b60e22fe-decd-4b63-9ca8-82179aa86366.png" alt="New Contracts" class="news-image">
+    <div class="news-card">
+        <img src="news.png" alt="New Contracts">
         <p>
             • <strong>New contracts available!</strong><br>
-            Available on <span class="platform">Android</span>,
-            <span class="platform">Steam</span>,
-            <span class="platform">App Store</span>
+            For all devices: Android, Steam, App Store
         </p>
     </div>
 </section>
 
+<!-- CODES SECTION -->
 <section id="codes">
-    <h3 class="section-title">Active Promo Codes</h3>
+    <h2 class="section-title">Active Codes</h2>
 
     <div class="code-card">
         <div>
             <div class="code">KUBOOM2026</div>
             <div class="status">STATUS: ACTIVE</div>
         </div>
-        <button>Copy</button>
+        <button onclick="copyCode('KUBOOM2026')">Copy</button>
     </div>
 
     <div class="code-card">
@@ -194,7 +126,15 @@ footer {
             <div class="code">KUBOOM!</div>
             <div class="status">STATUS: ACTIVE</div>
         </div>
-        <button>Copy</button>
+        <button onclick="copyCode('KUBOOM!')">Copy</button>
+    </div>
+
+    <div class="code-card">
+        <div>
+            <div class="code">KUBOOM*</div>
+            <div class="status">STATUS: ACTIVE</div>
+        </div>
+        <button onclick="copyCode('KUBOOM*')">Copy</button>
     </div>
 
     <div class="code-card">
@@ -202,13 +142,40 @@ footer {
             <div class="code">ALBATYA</div>
             <div class="status">STATUS: ACTIVE</div>
         </div>
-        <button>Copy</button>
+        <button onclick="copyCode('ALBATYA')">Copy</button>
+    </div>
+
+    <div class="code-card">
+        <div>
+            <div class="code">UPDATE</div>
+            <div class="status">STATUS: ACTIVE</div>
+        </div>
+        <button onclick="copyCode('UPDATE')">Copy</button>
+    </div>
+
+    <div class="code-card">
+        <div>
+            <div class="code">UPDATE1</div>
+            <div class="status">STATUS: ACTIVE</div>
+        </div>
+        <button onclick="copyCode('UPDATE1')">Copy</button>
+    </div>
+
+    <div class="code-card">
+        <div>
+            <div class="code">8YEARS</div>
+            <div class="status">STATUS: ACTIVE</div>
+        </div>
+        <button onclick="copyCode('8YEARS')">Copy</button>
     </div>
 </section>
 
-<footer>
-    ErrorKuboomHub — Fan-made Kuboom website
-</footer>
+<script>
+    function copyCode(code) {
+        navigator.clipboard.writeText(code);
+        alert("Copied: " + code);
+    }
+</script>
 
 </body>
 </html>
