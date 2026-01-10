@@ -7,68 +7,255 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
 <style>
 :root {
-    --main-color: #00ff66;
+    --main-color: #00ff66; 
     --dark: #0b0f0c;
     --card: #121a14;
 }
-* { margin:0; padding:0; box-sizing:border-box; font-family:'Orbitron',sans-serif; }
-body { background:radial-gradient(circle at top,#0b0f0c,#000); color:#fff; overflow-x:hidden; perspective:1000px; }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Orbitron', sans-serif;
+}
+
+body {
+    background: radial-gradient(circle at top, #0b0f0c, #000);
+    color: #fff;
+    overflow-x: hidden;
+    perspective: 1000px;
+}
 
 /* NAVBAR */
-nav { background: rgba(15,21,17,0.9); padding:15px 30px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; border-bottom:3px solid var(--main-color); position:sticky; top:0; z-index:1000; }
-nav h1 { color: var(--main-color); text-shadow:0 0 10px var(--main-color),0 0 20px var(--main-color); font-size:clamp(20px,4vw,36px); transform:rotateY(0deg); animation:slowSpin 12s infinite linear; cursor:default; }
-@keyframes slowSpin {0%{transform:rotateY(0deg);}100%{transform:rotateY(360deg);}}
-nav a { color:white; text-decoration:none; margin:5px 10px; transition:0.3s; position:relative; }
-nav a::after { content:''; display:block; height:2px; background:var(--main-color); transition:width 0.3s; width:0; }
-nav a:hover::after{width:100%;}
-nav select { margin:5px 10px; padding:5px 10px; border-radius:5px; border:none; background:var(--main-color); color:var(--dark); font-weight:bold; cursor:pointer; }
+nav {
+    background: rgba(15, 21, 17, 0.95);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid var(--main-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav h1 {
+    color: var(--main-color);
+    text-shadow: 0 0 10px var(--main-color), 0 0 20px var(--main-color);
+    font-size: clamp(20px, 4vw, 36px);
+    transform: rotateY(0deg);
+    animation: slowSpin 12s infinite linear;
+    cursor: default;
+}
+
+@keyframes slowSpin {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    transition: 0.3s;
+    position: relative;
+}
+nav a::after {
+    content: '';
+    display: block;
+    height: 2px;
+    background: var(--main-color);
+    transition: width 0.3s;
+    width: 0;
+}
+nav a:hover::after { width: 100%; }
+
+nav select {
+    margin-left: 20px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    background: var(--main-color);
+    color: var(--dark);
+    font-weight: bold;
+    cursor: pointer;
+}
 
 /* HEADER */
-header { height:220px; display:flex; align-items:center; justify-content:center; border-bottom:3px solid var(--main-color); perspective:800px; }
-header h2 { font-size:clamp(28px,8vw,60px); letter-spacing:6px; text-shadow:0 0 15px var(--main-color),0 0 30px var(--main-color); transform:rotateX(0deg); animation:pulse 2s infinite alternate; }
-@keyframes pulse {0%{transform:rotateX(0deg) scale(1);}50%{transform:rotateX(10deg) scale(1.05);}100%{transform:rotateX(0deg) scale(1);}}
-
-section { padding:50px 20px; max-width:1100px; margin:auto; }
-.section-title { color: var(--main-color); margin-bottom:30px; border-bottom:3px solid var(--main-color); padding-bottom:5px; text-shadow:0 0 10px var(--main-color); font-size: clamp(22px,5vw,36px); cursor:pointer; user-select:none; }
-
-.news-card { background: var(--card); padding:25px; margin-bottom:20px; border-left:5px solid var(--main-color); border-radius:12px; transition:all 0.4s ease; transform-style: preserve-3d; }
-.news-card:hover { transform: translateX(15px) rotateY(5deg) scale(1.03); box-shadow:0 0 20px var(--main-color); }
-
-.code-card { background:var(--card); padding:25px; margin-bottom:20px; display:flex; justify-content:space-between; align-items:center; border-radius:12px; transition: transform 0.4s, box-shadow 0.4s; cursor:pointer; perspective:500px; }
-.code-card:hover { transform:translateY(-5px) rotateY(5deg) scale(1.02); box-shadow:0 0 20px var(--main-color); }
-.code { font-size:20px; color:var(--main-color); letter-spacing:2px; text-shadow:0 0 10px var(--main-color); }
-.status { font-size:14px; margin-top:5px; text-shadow:0 0 5px var(--main-color); }
-.status.active { color:#7CFFAA; }
-.status.expired { color:#FF4C4C; }
-
-button { background:var(--main-color); border:none; padding:10px 20px; cursor:pointer; border-radius:8px; font-weight:bold; text-shadow:0 0 5px var(--main-color); transition:all 0.3s ease; }
-button:hover { transform:scale(1.1); box-shadow:0 0 15px var(--main-color); }
-
-footer { text-align:center; padding:80px 25px 25px 25px; border-top:3px solid var(--main-color); margin-top:40px; opacity:0.8; font-size:14px; position:relative; z-index:1; }
-
-/* DISCORD & YOUTUBE SLIDERS */
-#discordSlider, #youtubeSlider {
-    position: fixed; right:20px; bottom:80px; width:280px; background:#121212; border:3px solid var(--main-color); border-radius:12px; padding:20px; transition:bottom 0.3s; z-index:999; display:none;
+header {
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 3px solid var(--main-color);
+    perspective: 800px;
 }
-#discordSlider.open, #youtubeSlider.open { display:block; }
-#discordSlider h3, #youtubeSlider h3 { color:var(--main-color); margin-bottom:15px; text-align:center; }
-#discordSlider a, #youtubeSlider a { display:block; background:var(--main-color); color:#000; text-align:center; padding:10px 0; border-radius:8px; margin-top:10px; text-decoration:none; font-weight:bold; transition:0.3s; }
-#discordSlider a:hover, #youtubeSlider a:hover { background:#fff; }
 
-#discordButton,#youtubeButton{
-    position:fixed; bottom:20px; padding:12px 18px; border-radius:12px; font-weight:bold; box-shadow:0 0 10px; text-decoration:none; transition:0.3s; cursor:pointer;
+header h2 {
+    font-size: clamp(28px, 8vw, 60px);
+    letter-spacing: 6px;
+    text-shadow: 0 0 15px var(--main-color), 0 0 30px var(--main-color);
+    transform: rotateX(0deg);
+    animation: pulse 2s infinite alternate;
 }
-#discordButton{background:#7289da; color:#fff; right:150px; box-shadow:0 0 10px #7289da;}
-#youtubeButton{background:#FF0000; color:#fff; right:20px; box-shadow:0 0 10px #FF0000;}
-#discordButton:hover,#youtubeButton:hover{transform:scale(1.1); box-shadow:0 0 25px;}
-@media(max-width:768px){
-    nav{flex-direction:column; gap:10px; padding:15px; text-align:center;}
-    nav div{display:flex; flex-wrap:wrap; justify-content:center; gap:10px;}
-    nav a, nav select{margin-left:0;}
-    section{padding:30px 15px;}
-    .code-card{flex-direction:column; align-items:flex-start; gap:10px;}
-    button{width:100%;}
-    #discordButton,#youtubeButton{right:20px; bottom:auto; margin-bottom:10px; width:48%; display:inline-block;}
+
+@keyframes pulse {
+    0% { transform: rotateX(0deg) scale(1); }
+    50% { transform: rotateX(10deg) scale(1.05); }
+    100% { transform: rotateX(0deg) scale(1); }
+}
+
+/* SECTIONS */
+section {
+    padding: 50px 20px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.section-title {
+    color: var(--main-color);
+    margin-bottom: 30px;
+    border-bottom: 3px solid var(--main-color);
+    padding-bottom: 5px;
+    text-shadow: 0 0 10px var(--main-color);
+    font-size: clamp(22px, 5vw, 36px);
+    cursor: pointer;
+    user-select: none;
+}
+
+/* NEWS */
+.news-card {
+    background: var(--card);
+    padding: 25px;
+    margin-bottom: 20px;
+    border-left: 5px solid var(--main-color);
+    border-radius: 12px;
+    transition: all 0.4s ease;
+    transform-style: preserve-3d;
+}
+.news-card:hover {
+    transform: translateX(15px) rotateY(5deg) scale(1.03);
+    box-shadow: 0 0 20px var(--main-color);
+}
+
+/* CODES */
+.code-card {
+    background: var(--card);
+    padding: 25px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 12px;
+    transition: transform 0.4s, box-shadow 0.4s;
+    cursor: pointer;
+    perspective: 500px;
+}
+.code-card:hover {
+    transform: translateY(-5px) rotateY(5deg) scale(1.02);
+    box-shadow: 0 0 20px var(--main-color);
+}
+
+.code {
+    font-size: 20px;
+    color: var(--main-color);
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px var(--main-color);
+}
+
+.status {
+    font-size: 14px;
+    margin-top: 5px;
+    text-shadow: 0 0 5px var(--main-color);
+}
+
+.status.active { color: #7CFFAA; }
+.status.expired { color: #FF4C4C; font-weight: bold; }
+
+button.copy-btn {
+    background: var(--main-color);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: bold;
+    text-shadow: 0 0 5px var(--main-color);
+    transition: all 0.3s ease;
+}
+button.copy-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px var(--main-color);
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 25px;
+    border-top: 3px solid var(--main-color);
+    margin-top: 40px;
+    opacity: 0.9;
+    font-size: 14px;
+}
+
+/* SLIDERS */
+.slider {
+    position: fixed;
+    right: -300px;
+    top: 100px;
+    width: 280px;
+    background: #121212;
+    border: 3px solid var(--main-color);
+    border-radius: 12px;
+    padding: 20px;
+    transition: right 0.5s;
+    z-index: 999;
+}
+.slider.open { right: 20px; }
+.slider h3 { color: var(--main-color); margin-bottom: 15px; text-align: center; }
+.slider a { display: block; background: var(--main-color); color: #000; text-align: center; padding: 10px 0; border-radius: 8px; margin-top: 10px; text-decoration: none; font-weight: bold; transition: 0.3s; }
+.slider a:hover { background: #fff; }
+
+/* BUTTONS */
+#discordButton, #youtubeButton {
+    position: fixed;
+    bottom: 20px;
+    width: 130px;
+    padding: 12px 10px;
+    border-radius: 12px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+    z-index: 1000;
+    transition: 0.3s;
+}
+#discordButton { background: #7289da; right: 160px; box-shadow: 0 0 10px #7289da; }
+#youtubeButton { background: #FF0000; right: 20px; box-shadow: 0 0 10px #FF0000; }
+
+@media (max-width: 768px) {
+    #discordButton, #youtubeButton {
+        width: 45%;
+        right: auto;
+        bottom: 80px;
+    }
+    #discordButton { left: 4%; }
+    #youtubeButton { right: 4%; }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+        text-align: center;
+    }
+
+    nav div { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+    nav a, nav select { margin-left: 0; }
+    section { padding: 30px 15px; }
+    .code-card { flex-direction: column; align-items: flex-start; gap: 10px; }
+    button.copy-btn { width: 100%; }
 }
 </style>
 </head>
@@ -79,14 +266,15 @@ footer { text-align:center; padding:80px 25px 25px 25px; border-top:3px solid va
     <div>
         <a href="#news" id="navNews">News</a>
         <a href="#codes" id="navCodes">Promo Codes</a>
-        <a href="#weaponsTab" id="navWeapons">Weapons</a>
+        <a href="#weapons" id="navWeapons">Weapons</a>
         <select id="languageSelect" onchange="setLanguage(this.value)">
             <option value="en">🇺🇸 English</option>
             <option value="es">🇪🇸 Español</option>
             <option value="ru">🇷🇺 Русский</option>
-            <option value="hi">🇮🇳 हिंदी</option>
-            <option value="ur">🇵🇰 اردو</option>
-            <option value="pt">🇵🇹 Português</option>
+            <option value="hi">🇮🇳 Hindi</option>
+            <option value="ur">🇵🇰 Urdu</option>
+            <option value="fr">🇫🇷 Français</option>
+            <option value="de">🇩🇪 Deutsch</option>
         </select>
         <select id="themeSelect" onchange="changeTheme(this.value)">
             <option value="green">🟢 Green</option>
@@ -109,78 +297,85 @@ footer { text-align:center; padding:80px 25px 25px 25px; border-top:3px solid va
 </section>
 
 <section id="codes">
-    <h3 class="section-title">Active Promo Codes</h3>
-    <div id="codesContainer">
-        <div class="code-card"><div><div class="code">KUBOOM2026</div><div class="status active">STATUS: ACTIVE</div></div><button onclick="copyCode('KUBOOM2026')">Copy</button></div>
-        <div class="code-card"><div><div class="code">KUBOOM!</div><div class="status active">STATUS: ACTIVE</div></div><button onclick="copyCode('KUBOOM!')">Copy</button></div>
-        <div class="code-card"><div><div class="code">KUBOOM*</div><div class="status active">STATUS: ACTIVE</div></div><button onclick="copyCode('KUBOOM*')">Copy</button></div>
-        <div class="code-card"><div><div class="code">8YEARS</div><div class="status active">STATUS: ACTIVE</div></div><button onclick="copyCode('8YEARS')">Copy</button></div>
-    </div>
+    <h3 class="section-title" id="codesTitle">Active Promo Codes</h3>
+    <div class="code-card"><div><div class="code">KUBOOM2026</div><div class="status active">STATUS: ACTIVE</div></div><button class="copy-btn" onclick="copyCode('KUBOOM2026')">Copy</button></div>
+    <div class="code-card"><div><div class="code">KUBOOM!</div><div class="status active">STATUS: ACTIVE</div></div><button class="copy-btn" onclick="copyCode('KUBOOM!')">Copy</button></div>
+    <div class="code-card"><div><div class="code">KUBOOM*</div><div class="status active">STATUS: ACTIVE</div></div><button class="copy-btn" onclick="copyCode('KUBOOM*')">Copy</button></div>
+    <div class="code-card"><div><div class="code">8YEARS</div><div class="status active">STATUS: ACTIVE</div></div><button class="copy-btn" onclick="copyCode('8YEARS')">Copy</button></div>
+
+    <h3 class="section-title">Expired Promo Codes</h3>
+    <div class="code-card"><div><div class="code">ALBATYA</div><div class="status expired">STATUS: EXPIRED</div></div></div>
+    <div class="code-card"><div><div class="code">RUTUL</div><div class="status expired">STATUS: EXPIRED</div></div></div>
+    <div class="code-card"><div><div class="code">PLSBXOU</div><div class="status expired">STATUS: EXPIRED</div></div></div>
 </section>
 
-<section id="expiredCodes">
-    <h3 class="section-title">Expired Codes</h3>
-    <div id="expiredCodesContainer">
-        <div class="code-card"><div><div class="code">ALBATYA</div><div class="status expired">EXPIRED</div></div><button onclick="copyCode('ALBATYA')">Copy</button></div>
-        <div class="code-card"><div><div class="code">PLSBXOU</div><div class="status expired">EXPIRED</div></div><button onclick="copyCode('PLSBXOU')">Copy</button></div>
-        <div class="code-card"><div><div class="code">RUTUL</div><div class="status expired">EXPIRED</div></div><button onclick="copyCode('RUTUL')">Copy</button></div>
-    </div>
+<section id="weapons">
+    <h3 class="section-title">Weapons Info</h3>
+    <div class="news-card">Coming soon! Go take a look 👀</div>
 </section>
 
-<section id="weaponsTab">
-    <h3 class="section-title">Weapons</h3>
-    <div class="news-card">Coming Soon — Go take a look!</div>
-</section>
-
-<footer id="footerText">KuboomForum — Fan-made Kuboom website — Made with ❤️ by errorkuboom</footer>
+<footer>
+    Made with ❤️ by errorkuboom
+</footer>
 
 <button id="discordButton" onclick="toggleSlider('discordSlider')">Join Discord</button>
 <button id="youtubeButton" onclick="toggleSlider('youtubeSlider')">My YouTube</button>
 
-<div id="discordSlider">
+<div id="discordSlider" class="slider">
     <h3>Discord</h3>
     <a href="https://discord.gg/BhbsHkcS" target="_blank">Join Server</a>
 </div>
 
-<div id="youtubeSlider">
+<div id="youtubeSlider" class="slider">
     <h3>YouTube</h3>
     <a href="https://www.youtube.com/@3rrorKuboom" target="_blank">Visit Channel</a>
 </div>
 
 <script>
-function copyCode(text){navigator.clipboard.writeText(text); alert("Copied code: "+text);}
-function toggleSlider(id){
-    const discord=document.getElementById('discordSlider');
-    const youtube=document.getElementById('youtubeSlider');
-    if(id=='discordSlider'){ discord.classList.toggle('open'); youtube.classList.remove('open'); }
-    else { youtube.classList.toggle('open'); discord.classList.remove('open'); }
+function copyCode(text){
+    navigator.clipboard.writeText(text);
+    alert("Copied code: " + text);
 }
-function changeTheme(color){switch(color){
-case "green":document.documentElement.style.setProperty('--main-color','#00ff66');break;
-case "red":document.documentElement.style.setProperty('--main-color','#ff4c4c');break;
-case "blue":document.documentElement.style.setProperty('--main-color','#4cafff');break;
-case "yellow":document.documentElement.style.setProperty('--main-color','#ffe74c');break;
-}}
-const texts={
-en:{navNews:"News",navCodes:"Promo Codes",navWeapons:"Weapons",header:"HOME",newsTitle:"Latest Kuboom News",news1:"🔥 Join Kuboom official server for help and report bugs",footer:"KuboomForum — Fan-made Kuboom website — Made with ❤️ by errorkuboom",copyAlert:"Copied code: "},
-es:{navNews:"Noticias",navCodes:"Códigos",navWeapons:"Armas",header:"INICIO",newsTitle:"Últimas Noticias de Kuboom",news1:"🔥 Únete al servidor oficial de Kuboom para ayuda y reportar errores",footer:"KuboomForum — Sitio de fans de Kuboom — Made with ❤️ by errorkuboom",copyAlert:"Código copiado: "},
-ru:{navNews:"Новости",navCodes:"Коды",navWeapons:"Оружие",header:"ДОМОЙ",newsTitle:"Последние новости Kuboom",news1:"🔥 Присоединяйтесь к официальному серверу Kuboom для помощи и отчетов об ошибках",footer:"KuboomForum — фан-сайт Kuboom — Made with ❤️ by errorkuboom",copyAlert:"Скопировано: "},
-hi:{navNews:"समाचार",navCodes:"कोड",navWeapons:"हथियार",header:"मुखपृष्ठ",newsTitle:"हाल की Kuboom समाचार",news1:"🔥 मदद और बग रिपोर्ट करने के लिए Kuboom आधिकारिक सर्वर में शामिल हों",footer:"KuboomForum — फैन-निर्मित Kuboom वेबसाइट — Made with ❤️ by errorkuboom",copyAlert:"कोड कॉपी किया गया: "},
-ur:{navNews:"خبریں",navCodes:"کوڈز",navWeapons:"ہتھیار",header:"ہوم",newsTitle:"تازہ ترین Kuboom خبریں",news1:"🔥 مدد اور بگ رپورٹ کرنے کے لیے Kuboom آفیشل سرور میں شامل ہوں",footer:"KuboomForum — فین میڈ ویب سائٹ — Made with ❤️ by errorkuboom",copyAlert:"کوڈ کاپی ہوگیا: "},
-pt:{navNews:"Notícias",navCodes:"Códigos",navWeapons:"Armas",header:"INÍCIO",newsTitle:"Últimas Notícias do Kuboom",news1:"🔥 Entre no servidor oficial do Kuboom para ajuda e reportar bugs",footer:"KuboomForum — Site de fãs do Kuboom — Made with ❤️ by errorkuboom",copyAlert:"Código copiado: "}
+
+function toggleSlider(sliderId){
+    const sliders = ['discordSlider','youtubeSlider'];
+    sliders.forEach(id => {
+        const s = document.getElementById(id);
+        if(id === sliderId) s.classList.toggle('open');
+        else s.classList.remove('open');
+    });
+}
+
+function changeTheme(color){
+    switch(color){
+        case "green": document.documentElement.style.setProperty('--main-color','#00ff66'); break;
+        case "red": document.documentElement.style.setProperty('--main-color','#ff4c4c'); break;
+        case "blue": document.documentElement.style.setProperty('--main-color','#4cafff'); break;
+        case "yellow": document.documentElement.style.setProperty('--main-color','#ffe74c'); break;
+    }
+}
+
+const texts = {
+en:{navNews:"News",navCodes:"Promo Codes",navWeapons:"Weapons",header:"HOME",newsTitle:"Latest Kuboom News"},
+es:{navNews:"Noticias",navCodes:"Códigos Promocionales",navWeapons:"Armas",header:"INICIO",newsTitle:"Últimas Noticias de Kuboom"},
+ru:{navNews:"Новости",navCodes:"Промокоды",navWeapons:"Оружие",header:"ДОМОЙ",newsTitle:"Последние новости Kuboom"},
+hi:{navNews:"समाचार",navCodes:"प्रमो कोड",navWeapons:"हथियार",header:"मुखपृष्ठ",newsTitle:"हाल की Kuboom समाचार"},
+ur:{navNews:"خبریں",navCodes:"پرومو کوڈز",navWeapons:"ہتھیار",header:"ہوم",newsTitle:"تازہ ترین Kuboom خبریں"},
+fr:{navNews:"Actualités",navCodes:"Codes Promo",navWeapons:"Armes",header:"ACCUEIL",newsTitle:"Dernières nouvelles de Kuboom"},
+de:{navNews:"Neuigkeiten",navCodes:"Promo-Codes",navWeapons:"Waffen",header:"STARTSEITE",newsTitle:"Neueste Kuboom Nachrichten"}
 };
+
 function setLanguage(lang){
-    const t=texts[lang];
-    document.getElementById('navNews').innerText=t.navNews;
-    document.getElementById('navCodes').innerText=t.navCodes;
-    document.getElementById('navWeapons').innerText=t.navWeapons;
-    document.getElementById('headerText').innerText=t.header;
-    document.getElementById('newsTitle').innerText=t.newsTitle;
-    document.getElementById('news1').innerHTML=t.news1.replace(/(https?:\/\/[^\s]+)/g,'<a href="$1" target="_blank" style="color: var(--main-color); text-decoration: underline;">$1</a>');
-    document.getElementById('footerText').innerText=t.footer;
-    window.copyCode=function(text){navigator.clipboard.writeText(text); alert(t.copyAlert+text);}
+    const t = texts[lang] || texts['en'];
+    document.getElementById('navNews').innerText = t.navNews;
+    document.getElementById('navCodes').innerText = t.navCodes;
+    document.getElementById('navWeapons').innerText = t.navWeapons;
+    document.getElementById('headerText').innerText = t.header;
+    document.getElementById('newsTitle').innerText = t.newsTitle;
 }
+
 setLanguage('en');
 </script>
+
 </body>
 </html>
