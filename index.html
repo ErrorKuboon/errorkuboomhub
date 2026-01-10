@@ -37,43 +37,27 @@ nav {
 
 nav h1 {
     color: var(--green);
-    font-size: 1.5rem;
 }
 
 nav a {
     color: white;
     text-decoration: none;
     margin-left: 15px;
-    transition: 0.3s;
-    font-size: 0.9rem;
 }
 
 nav a:hover {
     color: var(--green);
 }
 
-nav select {
-    margin-left: 15px;
-    padding: 5px 10px;
-    border-radius: 5px;
-    border: none;
-    background: var(--green);
-    color: var(--dark);
-    font-weight: bold;
-    cursor: pointer;
-}
-
 /* HEADER */
 header {
     padding: 40px 20px;
-    display: flex;
-    justify-content: center;
+    text-align: center;
     border-bottom: 2px solid var(--green);
 }
 
 header h2 {
-    font-size: clamp(1.5rem, 5vw, 3rem);
-    letter-spacing: 4px;
+    font-size: clamp(1.8rem, 5vw, 3rem);
 }
 
 /* SECTIONS */
@@ -87,19 +71,17 @@ section {
     color: var(--green);
     margin-bottom: 20px;
     border-bottom: 2px solid var(--green);
-    padding-bottom: 5px;
 }
 
 /* NEWS */
 .news-card {
     background: var(--card);
-    padding: 15px 20px;
-    margin-bottom: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
     border-left: 4px solid var(--green);
 }
 
 .news-highlight {
-    border-left: none;
     border: 2px solid var(--green);
     text-align: center;
 }
@@ -107,14 +89,9 @@ section {
 .news-image {
     width: 100%;
     max-width: 600px;
-    border-radius: 8px;
-    margin: 10px auto;
     display: block;
-}
-
-.news-text {
-    margin-top: 10px;
-    font-size: 1rem;
+    margin: 10px auto;
+    border-radius: 8px;
 }
 
 .platform {
@@ -128,7 +105,6 @@ section {
     padding: 15px 20px;
     margin-bottom: 15px;
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
 }
@@ -147,9 +123,8 @@ button {
     background: var(--green);
     border: none;
     padding: 8px 15px;
-    cursor: pointer;
     border-radius: 5px;
-    font-weight: bold;
+    cursor: pointer;
 }
 
 /* FOOTER */
@@ -158,16 +133,10 @@ footer {
     padding: 20px;
     border-top: 2px solid var(--green);
     margin-top: 40px;
-    opacity: 0.8;
 }
 
 /* MOBILE */
 @media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
     .code-card {
         flex-direction: column;
         align-items: flex-start;
@@ -175,6 +144,7 @@ footer {
 
     .code-card button {
         align-self: flex-end;
+        margin-top: 10px;
     }
 }
 </style>
@@ -185,13 +155,13 @@ footer {
 <nav>
     <h1>ErrorKuboomHub</h1>
     <div>
-        <a href="#news" id="navNews">News</a>
-        <a href="#codes" id="navCodes">Codes</a>
+        <a href="#news">News</a>
+        <a href="#codes">Codes</a>
     </div>
 </nav>
 
 <header>
-    <h2 id="headerText">HOME</h2>
+    <h2>HOME</h2>
 </header>
 
 <section id="news">
@@ -199,14 +169,41 @@ footer {
 
     <div class="news-card news-highlight">
         <img src="b60e22fe-decd-4b63-9ca8-82179aa86366.png" alt="New Contracts" class="news-image">
-        <div class="news-text">
+        <p>
             • <strong>New contracts available!</strong><br>
             Available on <span class="platform">Android</span>,
             <span class="platform">Steam</span>,
             <span class="platform">App Store</span>
+        </p>
+    </div>
+</section>
+
+<section id="codes">
+    <h3 class="section-title">Active Promo Codes</h3>
+
+    <div class="code-card">
+        <div>
+            <div class="code">KUBOOM2026</div>
+            <div class="status">STATUS: ACTIVE</div>
         </div>
+        <button>Copy</button>
     </div>
 
+    <div class="code-card">
+        <div>
+            <div class="code">KUBOOM!</div>
+            <div class="status">STATUS: ACTIVE</div>
+        </div>
+        <button>Copy</button>
+    </div>
+
+    <div class="code-card">
+        <div>
+            <div class="code">ALBATYA</div>
+            <div class="status">STATUS: ACTIVE</div>
+        </div>
+        <button>Copy</button>
+    </div>
 </section>
 
 <footer>
