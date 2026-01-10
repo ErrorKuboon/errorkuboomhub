@@ -32,7 +32,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
-    transition: all 0.3s ease; /* smooth theme transition */
+    transition: all 0.3s ease;
 }
 
 body {
@@ -52,8 +52,6 @@ nav {
 
 nav h1 {
     color: var(--primary);
-    display: inline-block;
-    margin-right: 10px;
 }
 
 nav a {
@@ -210,17 +208,12 @@ button.copy-btn {
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    transition: 0.3s;
 }
 
 button.copy-btn:hover {
-    animation: bounce 0.3s;
+    transform: translateY(-3px);
     opacity: 0.9;
-}
-
-@keyframes bounce {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
-    100% { transform: translateY(0); }
 }
 
 /* FOOTER */
@@ -229,21 +222,26 @@ footer {
     padding: 20px;
     border-top: 2px solid var(--primary);
     margin-top: 40px;
-    opacity: 0.7;
+    opacity: 0.9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
-/* YOUTUBE ICON */
-nav .youtube-link {
-    display: inline-block;
-    margin-left: 15px;
-    font-size: 24px;
-    color: red;
-    transition: transform 0.3s, color 0.3s;
+footer img {
+    height: 24px;
+    cursor: pointer;
+    transition: transform 0.3s;
 }
 
-nav .youtube-link:hover {
+footer img:hover {
     transform: scale(1.2);
-    color: #ff0000;
+}
+
+/* Add smooth theme changes */
+body, header, section, footer, nav {
+    transition: all 0.3s ease;
 }
 </style>
 </head>
@@ -251,10 +249,7 @@ nav .youtube-link:hover {
 <body>
 
 <nav>
-    <div style="display:flex; align-items:center;">
-        <h1>ErrorKuboomHub</h1>
-        <a href="https://www.youtube.com/channel/UCFDDdPy6VU8FOD5YEnTARvw" target="_blank" class="youtube-link">▶️</a>
-    </div>
+    <h1>ErrorKuboomHub</h1>
     <div class="controls">
         <a href="#news" id="navNews">News</a>
         <a href="#codes" id="navCodes">Codes</a>
@@ -316,14 +311,49 @@ nav .youtube-link:hover {
         </div>
         <button class="copy-btn" onclick="copyCode('KUBOOM*')">Copy</button>
     </div>
+
+    <div class="code-card">
+        <div>
+            <div class="code">ALBATYA</div>
+            <div class="status">STATUS: ACTIVE</div>
+        </div>
+        <button class="copy-btn" onclick="copyCode('ALBATYA')">Copy</button>
+    </div>
+
+    <div class="code-card">
+        <div>
+            <div class="code">UPDATE</div>
+            <div class="status">STATUS: ACTIVE</div>
+        </div>
+        <button class="copy-btn" onclick="copyCode('UPDATE')">Copy</button>
+    </div>
+
+    <div class="code-card">
+        <div>
+            <div class="code">UPDATE1</div>
+            <div class="status">STATUS: ACTIVE</div>
+        </div>
+        <button class="copy-btn" onclick="copyCode('UPDATE1')">Copy</button>
+    </div>
+
+    <div class="code-card">
+        <div>
+            <div class="code">8YEARS</div>
+            <div class="status">STATUS: ACTIVE</div>
+        </div>
+        <button class="copy-btn" onclick="copyCode('8YEARS')">Copy</button>
+    </div>
 </section>
 
 <footer id="footerText">
     ErrorKuboomHub — Fan-made Kuboom website
+    <a href="https://www.youtube.com/channel/UCFDDdPy6VU8FOD5YEnTARvw" target="_blank">
+        <img src="youtube-logo.png" alt="YouTube Channel">
+    </a>
 </footer>
 
 <script>
-// Copy code function with alert
+// Copy code function
 function copyCode(text) {
     navigator.clipboard.writeText(text);
     alert("Copied code: " + text);
@@ -346,7 +376,7 @@ function setLanguage(lang) {
     document.getElementById('news1').innerText = texts[lang].news1;
     document.getElementById('news2').innerText = texts[lang].news2;
     document.getElementById('codesTitle').innerText = texts[lang].codesTitle;
-    document.getElementById('footerText').innerText = texts[lang].footer;
+    document.getElementById('footerText').childNodes[0].textContent = texts[lang].footer;
     window.copyCode = function(text) {
         navigator.clipboard.writeText(text);
         alert(texts[lang].copyAlert + text);
@@ -365,7 +395,7 @@ function setTheme(theme) {
     } else {
         document.body.removeAttribute('data-theme');
     }
-    toggleDropdown(); // hide dropdown after selecting
+    toggleDropdown();
 }
 
 // Default language
