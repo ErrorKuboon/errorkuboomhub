@@ -2,14 +2,23 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ErrorKuboomHub</title>
 
 <style>
 :root {
-    --green: #00ff66;
-    --dark: #0b0f0c;
+    /* Default GREEN theme */
+    --primary: #00ff66;
+    --background: #0b0f0c;
     --card: #121a14;
+    --text: white;
+}
+
+/* WHITE & BLACK theme variables */
+[data-theme="bw"] {
+    --primary: #000000; /* black primary elements like borders */
+    --background: #ffffff;
+    --card: #f0f0f0;
+    --text: #000000;
 }
 
 * {
@@ -19,49 +28,53 @@
     font-family: Arial, sans-serif;
 }
 
-html, body {
-    overflow-x: hidden;
-}
-
 body {
-    background: var(--dark);
-    color: white;
+    background: var(--background);
+    color: var(--text);
 }
 
 /* NAVBAR */
 nav {
-    background: #0f1511;
+    background: var(--card);
     padding: 15px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid var(--green);
+    border-bottom: 2px solid var(--primary);
 }
 
 nav h1 {
-    color: var(--green);
+    color: var(--primary);
 }
 
 nav a {
-    color: white;
+    color: var(--text);
     text-decoration: none;
     margin-left: 20px;
     transition: 0.3s;
 }
 
 nav a:hover {
-    color: var(--green);
+    color: var(--primary);
 }
 
-nav select {
+nav select, nav button {
     margin-left: 20px;
     padding: 5px 10px;
     border-radius: 5px;
     border: none;
-    background: var(--green);
-    color: var(--dark);
-    font-weight: bold;
     cursor: pointer;
+    font-weight: bold;
+}
+
+nav select {
+    background: var(--primary);
+    color: var(--background);
+}
+
+nav button {
+    background: var(--primary);
+    color: var(--text);
 }
 
 /* HEADER */
@@ -70,12 +83,12 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom: 2px solid var(--green);
+    border-bottom: 2px solid var(--primary);
 }
 
 header h2 {
-    font-size: clamp(28px, 6vw, 48px);
-    letter-spacing: 4px;
+    font-size: 48px;
+    letter-spacing: 6px;
 }
 
 /* SECTIONS */
@@ -86,9 +99,9 @@ section {
 }
 
 .section-title {
-    color: var(--green);
+    color: var(--primary);
     margin-bottom: 20px;
-    border-bottom: 2px solid var(--green);
+    border-bottom: 2px solid var(--primary);
     padding-bottom: 5px;
 }
 
@@ -97,7 +110,7 @@ section {
     background: var(--card);
     padding: 20px;
     margin-bottom: 15px;
-    border-left: 4px solid var(--green);
+    border-left: 4px solid var(--primary);
     transition: 0.3s;
 }
 
@@ -122,17 +135,17 @@ section {
 
 .code {
     font-size: 18px;
-    color: var(--green);
+    color: var(--primary);
     letter-spacing: 2px;
 }
 
 .status {
     font-size: 14px;
-    color: #7CFFAA;
+    color: var(--primary);
 }
 
-button {
-    background: var(--green);
+button.copy-btn {
+    background: var(--primary);
     border: none;
     padding: 8px 15px;
     cursor: pointer;
@@ -140,7 +153,7 @@ button {
     font-weight: bold;
 }
 
-button:hover {
+button.copy-btn:hover {
     opacity: 0.8;
 }
 
@@ -148,45 +161,9 @@ button:hover {
 footer {
     text-align: center;
     padding: 20px;
-    border-top: 2px solid var(--green);
+    border-top: 2px solid var(--primary);
     margin-top: 40px;
     opacity: 0.7;
-}
-
-/* MOBILE FIXES */
-@media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-        gap: 10px;
-        padding: 15px;
-        text-align: center;
-    }
-
-    nav div {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-    }
-
-    nav a,
-    nav select {
-        margin-left: 0;
-    }
-
-    section {
-        padding: 20px;
-    }
-
-    .code-card {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
-
-    button {
-        width: 100%;
-    }
 }
 </style>
 </head>
@@ -204,6 +181,7 @@ footer {
             <option value="ru">Русский</option>
             <option value="hi">हिंदी</option>
         </select>
+        <button onclick="toggleTheme()">Toggle BW Theme</button>
     </div>
 </nav>
 
@@ -231,7 +209,7 @@ footer {
             <div class="code">KUBOOM2026</div>
             <div class="status">STATUS: ACTIVE</div>
         </div>
-        <button onclick="copyCode('KUBOOM2026')">Copy</button>
+        <button class="copy-btn" onclick="copyCode('KUBOOM2026')">Copy</button>
     </div>
 
     <div class="code-card">
@@ -239,7 +217,7 @@ footer {
             <div class="code">KUBOOM!</div>
             <div class="status">STATUS: ACTIVE</div>
         </div>
-        <button onclick="copyCode('KUBOOM!')">Copy</button>
+        <button class="copy-btn" onclick="copyCode('KUBOOM!')">Copy</button>
     </div>
 
     <div class="code-card">
@@ -247,7 +225,7 @@ footer {
             <div class="code">KUBOOM*</div>
             <div class="status">STATUS: ACTIVE</div>
         </div>
-        <button onclick="copyCode('KUBOOM*')">Copy</button>
+        <button class="copy-btn" onclick="copyCode('KUBOOM*')">Copy</button>
     </div>
 
     <div class="code-card">
@@ -255,7 +233,7 @@ footer {
             <div class="code">ALBATYA</div>
             <div class="status">STATUS: ACTIVE</div>
         </div>
-        <button onclick="copyCode('ALBATYA')">Copy</button>
+        <button class="copy-btn" onclick="copyCode('ALBATYA')">Copy</button>
     </div>
 
     <div class="code-card">
@@ -263,7 +241,7 @@ footer {
             <div class="code">UPDATE</div>
             <div class="status">STATUS: ACTIVE</div>
         </div>
-        <button onclick="copyCode('UPDATE')">Copy</button>
+        <button class="copy-btn" onclick="copyCode('UPDATE')">Copy</button>
     </div>
 
     <div class="code-card">
@@ -271,7 +249,7 @@ footer {
             <div class="code">UPDATE1</div>
             <div class="status">STATUS: ACTIVE</div>
         </div>
-        <button onclick="copyCode('UPDATE1')">Copy</button>
+        <button class="copy-btn" onclick="copyCode('UPDATE1')">Copy</button>
     </div>
 
     <div class="code-card">
@@ -279,7 +257,7 @@ footer {
             <div class="code">8YEARS</div>
             <div class="status">STATUS: ACTIVE</div>
         </div>
-        <button onclick="copyCode('8YEARS')">Copy</button>
+        <button class="copy-btn" onclick="copyCode('8YEARS')">Copy</button>
     </div>
 </section>
 
@@ -288,11 +266,13 @@ footer {
 </footer>
 
 <script>
+// Default copy function
 function copyCode(text) {
     navigator.clipboard.writeText(text);
     alert("Copied code: " + text);
 }
 
+// Language translations
 const texts = {
     en: {
         navNews: "News",
@@ -340,6 +320,7 @@ const texts = {
     }
 };
 
+// Function to set language
 function setLanguage(lang) {
     document.getElementById('navNews').innerText = texts[lang].navNews;
     document.getElementById('navCodes').innerText = texts[lang].navCodes;
@@ -350,12 +331,23 @@ function setLanguage(lang) {
     document.getElementById('codesTitle').innerText = texts[lang].codesTitle;
     document.getElementById('footerText').innerText = texts[lang].footer;
 
+    // Update copyCode alert
     window.copyCode = function(text) {
         navigator.clipboard.writeText(text);
         alert(texts[lang].copyAlert + text);
     }
 }
 
+// Theme toggle
+function toggleTheme() {
+    if (document.body.getAttribute('data-theme') === 'bw') {
+        document.body.removeAttribute('data-theme'); // back to green
+    } else {
+        document.body.setAttribute('data-theme', 'bw'); // switch to black & white
+    }
+}
+
+// Set default language to English
 setLanguage('en');
 </script>
 
