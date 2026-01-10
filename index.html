@@ -34,7 +34,6 @@ section { padding:50px 20px; max-width:1100px; margin:auto; }
 .news-card { background: var(--card); padding:25px; margin-bottom:20px; border-left:5px solid var(--main-color); border-radius:12px; transition:all 0.4s ease; transform-style: preserve-3d; }
 .news-card:hover { transform: translateX(15px) rotateY(5deg) scale(1.03); box-shadow:0 0 20px var(--main-color); }
 
-#codesContainer,#expiredCodesContainer { overflow:hidden; transition:max-height 0.6s ease; }
 .code-card { background:var(--card); padding:25px; margin-bottom:20px; display:flex; justify-content:space-between; align-items:center; border-radius:12px; transition: transform 0.4s, box-shadow 0.4s; cursor:pointer; perspective:500px; }
 .code-card:hover { transform:translateY(-5px) rotateY(5deg) scale(1.02); box-shadow:0 0 20px var(--main-color); }
 .code { font-size:20px; color:var(--main-color); letter-spacing:2px; text-shadow:0 0 10px var(--main-color); }
@@ -45,8 +44,9 @@ section { padding:50px 20px; max-width:1100px; margin:auto; }
 button { background:var(--main-color); border:none; padding:10px 20px; cursor:pointer; border-radius:8px; font-weight:bold; text-shadow:0 0 5px var(--main-color); transition:all 0.3s ease; }
 button:hover { transform:scale(1.1); box-shadow:0 0 15px var(--main-color); }
 
-footer { text-align:center; padding:60px 25px 25px 25px; border-top:3px solid var(--main-color); margin-top:40px; opacity:0.8; font-size:14px; position:relative; z-index:1; }
+footer { text-align:center; padding:80px 25px 25px 25px; border-top:3px solid var(--main-color); margin-top:40px; opacity:0.8; font-size:14px; position:relative; z-index:1; }
 
+/* DISCORD & YOUTUBE SLIDERS */
 #discordSlider, #youtubeSlider {
     position: fixed; right:20px; bottom:80px; width:280px; background:#121212; border:3px solid var(--main-color); border-radius:12px; padding:20px; transition:bottom 0.3s; z-index:999; display:none;
 }
@@ -109,8 +109,8 @@ footer { text-align:center; padding:60px 25px 25px 25px; border-top:3px solid va
 </section>
 
 <section id="codes">
-    <h3 class="section-title" onclick="toggleCodes()">Active Promo Codes (Click to expand)</h3>
-    <div id="codesContainer" style="max-height:0;">
+    <h3 class="section-title">Active Promo Codes</h3>
+    <div id="codesContainer">
         <div class="code-card"><div><div class="code">KUBOOM2026</div><div class="status active">STATUS: ACTIVE</div></div><button onclick="copyCode('KUBOOM2026')">Copy</button></div>
         <div class="code-card"><div><div class="code">KUBOOM!</div><div class="status active">STATUS: ACTIVE</div></div><button onclick="copyCode('KUBOOM!')">Copy</button></div>
         <div class="code-card"><div><div class="code">KUBOOM*</div><div class="status active">STATUS: ACTIVE</div></div><button onclick="copyCode('KUBOOM*')">Copy</button></div>
@@ -149,7 +149,6 @@ footer { text-align:center; padding:60px 25px 25px 25px; border-top:3px solid va
 
 <script>
 function copyCode(text){navigator.clipboard.writeText(text); alert("Copied code: "+text);}
-function toggleCodes(){const c=document.getElementById('codesContainer'); c.style.maxHeight=(c.style.maxHeight && c.style.maxHeight!="0px")?"0":c.scrollHeight+"px";}
 function toggleSlider(id){
     const discord=document.getElementById('discordSlider');
     const youtube=document.getElementById('youtubeSlider');
@@ -163,12 +162,12 @@ case "blue":document.documentElement.style.setProperty('--main-color','#4cafff')
 case "yellow":document.documentElement.style.setProperty('--main-color','#ffe74c');break;
 }}
 const texts={
-en:{navNews:"News",navCodes:"Promo Codes",navWeapons:"Weapons",header:"HOME",newsTitle:"Latest Kuboom News",news1:"🔥 Join Kuboom official server for help and report bugs",codesTitle:"Active Promo Codes",footer:"KuboomForum — Fan-made Kuboom website — Made with ❤️ by errorkuboom",copyAlert:"Copied code: "},
-es:{navNews:"Noticias",navCodes:"Códigos",navWeapons:"Armas",header:"INICIO",newsTitle:"Últimas Noticias de Kuboom",news1:"🔥 Únete al servidor oficial de Kuboom para ayuda y reportar errores",codesTitle:"Códigos Promocionales Activos",footer:"KuboomForum — Sitio de fans de Kuboom — Made with ❤️ by errorkuboom",copyAlert:"Código copiado: "},
-ru:{navNews:"Новости",navCodes:"Коды",navWeapons:"Оружие",header:"ДОМОЙ",newsTitle:"Последние новости Kuboom",news1:"🔥 Присоединяйтесь к официальному серверу Kuboom для помощи и отчетов об ошибках",codesTitle:"Активные промокоды",footer:"KuboomForum — фан-сайт Kuboom — Made with ❤️ by errorkuboom",copyAlert:"Скопировано: "},
-hi:{navNews:"समाचार",navCodes:"कोड",navWeapons:"हथियार",header:"मुखपृष्ठ",newsTitle:"हाल की Kuboom समाचार",news1:"🔥 मदद और बग रिपोर्ट करने के लिए Kuboom आधिकारिक सर्वर में शामिल हों",codesTitle:"सक्रिय प्रोमो कोड",footer:"KuboomForum — फैन-निर्मित Kuboom वेबसाइट — Made with ❤️ by errorkuboom",copyAlert:"कोड कॉपी किया गया: "},
-ur:{navNews:"خبریں",navCodes:"کوڈز",navWeapons:"ہتھیار",header:"ہوم",newsTitle:"تازہ ترین Kuboom خبریں",news1:"🔥 مدد اور بگ رپورٹ کرنے کے لیے Kuboom آفیشل سرور میں شامل ہوں",codesTitle:"فعال پرومو کوڈز",footer:"KuboomForum — فین میڈ ویب سائٹ — Made with ❤️ by errorkuboom",copyAlert:"کوڈ کاپی ہوگیا: "},
-pt:{navNews:"Notícias",navCodes:"Códigos",navWeapons:"Armas",header:"INÍCIO",newsTitle:"Últimas Notícias do Kuboom",news1:"🔥 Entre no servidor oficial do Kuboom para ajuda e reportar bugs",codesTitle:"Códigos Ativos",footer:"KuboomForum — Site de fãs do Kuboom — Made with ❤️ by errorkuboom",copyAlert:"Código copiado: "}
+en:{navNews:"News",navCodes:"Promo Codes",navWeapons:"Weapons",header:"HOME",newsTitle:"Latest Kuboom News",news1:"🔥 Join Kuboom official server for help and report bugs",footer:"KuboomForum — Fan-made Kuboom website — Made with ❤️ by errorkuboom",copyAlert:"Copied code: "},
+es:{navNews:"Noticias",navCodes:"Códigos",navWeapons:"Armas",header:"INICIO",newsTitle:"Últimas Noticias de Kuboom",news1:"🔥 Únete al servidor oficial de Kuboom para ayuda y reportar errores",footer:"KuboomForum — Sitio de fans de Kuboom — Made with ❤️ by errorkuboom",copyAlert:"Código copiado: "},
+ru:{navNews:"Новости",navCodes:"Коды",navWeapons:"Оружие",header:"ДОМОЙ",newsTitle:"Последние новости Kuboom",news1:"🔥 Присоединяйтесь к официальному серверу Kuboom для помощи и отчетов об ошибках",footer:"KuboomForum — фан-сайт Kuboom — Made with ❤️ by errorkuboom",copyAlert:"Скопировано: "},
+hi:{navNews:"समाचार",navCodes:"कोड",navWeapons:"हथियार",header:"मुखपृष्ठ",newsTitle:"हाल की Kuboom समाचार",news1:"🔥 मदद और बग रिपोर्ट करने के लिए Kuboom आधिकारिक सर्वर में शामिल हों",footer:"KuboomForum — फैन-निर्मित Kuboom वेबसाइट — Made with ❤️ by errorkuboom",copyAlert:"कोड कॉपी किया गया: "},
+ur:{navNews:"خبریں",navCodes:"کوڈز",navWeapons:"ہتھیار",header:"ہوم",newsTitle:"تازہ ترین Kuboom خبریں",news1:"🔥 مدد اور بگ رپورٹ کرنے کے لیے Kuboom آفیشل سرور میں شامل ہوں",footer:"KuboomForum — فین میڈ ویب سائٹ — Made with ❤️ by errorkuboom",copyAlert:"کوڈ کاپی ہوگیا: "},
+pt:{navNews:"Notícias",navCodes:"Códigos",navWeapons:"Armas",header:"INÍCIO",newsTitle:"Últimas Notícias do Kuboom",news1:"🔥 Entre no servidor oficial do Kuboom para ajuda e reportar bugs",footer:"KuboomForum — Site de fãs do Kuboom — Made with ❤️ by errorkuboom",copyAlert:"Código copiado: "}
 };
 function setLanguage(lang){
     const t=texts[lang];
@@ -183,6 +182,5 @@ function setLanguage(lang){
 }
 setLanguage('en');
 </script>
-
 </body>
 </html>
