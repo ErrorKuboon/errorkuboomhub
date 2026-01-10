@@ -4,9 +4,11 @@
 <meta charset="UTF-8">
 <title>ErrorKuboomHub</title>
 
+<!-- Favicon -->
+<link rel="icon" href="favicon.png" type="image/png">
+
 <style>
 :root {
-    /* DARK MODE default */
     --primary: #00ff66;
     --background: #0b0f0c;
     --card: #121a14;
@@ -30,6 +32,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
+    transition: all 0.3s ease; /* smooth theme transition */
 }
 
 body {
@@ -49,6 +52,8 @@ nav {
 
 nav h1 {
     color: var(--primary);
+    display: inline-block;
+    margin-right: 10px;
 }
 
 nav a {
@@ -74,7 +79,6 @@ nav select, nav button {
     border: none;
     cursor: pointer;
     font-weight: bold;
-    transition: 0.2s;
 }
 
 nav select {
@@ -117,6 +121,7 @@ nav .theme-dropdown button {
     color: var(--text);
     border: none;
     cursor: pointer;
+    transition: 0.2s;
 }
 
 nav .theme-dropdown button:hover {
@@ -158,11 +163,12 @@ section {
     padding: 20px;
     margin-bottom: 15px;
     border-left: 4px solid var(--primary);
-    transition: 0.3s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .news-card:hover {
     transform: translateX(8px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* CODES */
@@ -173,11 +179,13 @@ section {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: 0.3s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 8px;
 }
 
 .code-card:hover {
     transform: scale(1.02);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
 .code {
@@ -191,15 +199,28 @@ section {
     color: var(--primary);
 }
 
+/* COPY BUTTONS */
 button.copy-btn {
-    background: var(--button-bg);
+    background: var(--primary);
     color: var(--button-text);
-    border-radius: 5px;
+    border-radius: 8px;
     font-weight: bold;
+    padding: 10px 18px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
 }
 
 button.copy-btn:hover {
-    opacity: 0.8;
+    animation: bounce 0.3s;
+    opacity: 0.9;
+}
+
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0); }
 }
 
 /* FOOTER */
@@ -210,13 +231,30 @@ footer {
     margin-top: 40px;
     opacity: 0.7;
 }
+
+/* YOUTUBE ICON */
+nav .youtube-link {
+    display: inline-block;
+    margin-left: 15px;
+    font-size: 24px;
+    color: red;
+    transition: transform 0.3s, color 0.3s;
+}
+
+nav .youtube-link:hover {
+    transform: scale(1.2);
+    color: #ff0000;
+}
 </style>
 </head>
 
 <body>
 
 <nav>
-    <h1>ErrorKuboomHub</h1>
+    <div style="display:flex; align-items:center;">
+        <h1>ErrorKuboomHub</h1>
+        <a href="https://www.youtube.com/channel/UCFDDdPy6VU8FOD5YEnTARvw" target="_blank" class="youtube-link">▶️</a>
+    </div>
     <div class="controls">
         <a href="#news" id="navNews">News</a>
         <a href="#codes" id="navCodes">Codes</a>
@@ -278,38 +316,6 @@ footer {
         </div>
         <button class="copy-btn" onclick="copyCode('KUBOOM*')">Copy</button>
     </div>
-
-    <div class="code-card">
-        <div>
-            <div class="code">ALBATYA</div>
-            <div class="status">STATUS: ACTIVE</div>
-        </div>
-        <button class="copy-btn" onclick="copyCode('ALBATYA')">Copy</button>
-    </div>
-
-    <div class="code-card">
-        <div>
-            <div class="code">UPDATE</div>
-            <div class="status">STATUS: ACTIVE</div>
-        </div>
-        <button class="copy-btn" onclick="copyCode('UPDATE')">Copy</button>
-    </div>
-
-    <div class="code-card">
-        <div>
-            <div class="code">UPDATE1</div>
-            <div class="status">STATUS: ACTIVE</div>
-        </div>
-        <button class="copy-btn" onclick="copyCode('UPDATE1')">Copy</button>
-    </div>
-
-    <div class="code-card">
-        <div>
-            <div class="code">8YEARS</div>
-            <div class="status">STATUS: ACTIVE</div>
-        </div>
-        <button class="copy-btn" onclick="copyCode('8YEARS')">Copy</button>
-    </div>
 </section>
 
 <footer id="footerText">
@@ -317,7 +323,7 @@ footer {
 </footer>
 
 <script>
-// Copy code function
+// Copy code function with alert
 function copyCode(text) {
     navigator.clipboard.writeText(text);
     alert("Copied code: " + text);
@@ -347,7 +353,7 @@ function setLanguage(lang) {
     }
 }
 
-// Theme toggle
+// Theme dropdown toggle
 function toggleDropdown() {
     const dd = document.getElementById('themeDropdown');
     dd.style.display = dd.style.display === 'block' ? 'none' : 'block';
@@ -362,7 +368,7 @@ function setTheme(theme) {
     toggleDropdown(); // hide dropdown after selecting
 }
 
-// Set default language
+// Default language
 setLanguage('en');
 </script>
 
