@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
 <style>
 :root {
-    --main-color: #00ff66; 
+    --main-color: #00ff66; /* default green */
     --dark: #0b0f0c;
     --card: #121a14;
 }
@@ -28,7 +28,7 @@ body {
 
 /* NAVBAR */
 nav {
-    background: rgba(15, 21, 17, 0.95);
+    background: rgba(15, 21, 17, 0.9);
     padding: 15px 30px;
     display: flex;
     justify-content: space-between;
@@ -70,7 +70,7 @@ nav a::after {
 }
 nav a:hover::after { width: 100%; }
 
-nav select {
+nav select, #themeSelect {
     margin-left: 20px;
     padding: 5px 10px;
     border-radius: 5px;
@@ -166,13 +166,11 @@ section {
 .status {
     font-size: 14px;
     margin-top: 5px;
-    text-shadow: 0 0 5px var(--main-color);
 }
+.status.active { color: #7CFFAA; text-shadow: 0 0 5px var(--main-color); }
+.status.expired { color: red; text-shadow: 0 0 5px red; }
 
-.status.active { color: #7CFFAA; }
-.status.expired { color: #FF4C4C; font-weight: bold; }
-
-button.copy-btn {
+button {
     background: var(--main-color);
     border: none;
     padding: 10px 20px;
@@ -182,7 +180,7 @@ button.copy-btn {
     text-shadow: 0 0 5px var(--main-color);
     transition: all 0.3s ease;
 }
-button.copy-btn:hover {
+button:hover {
     transform: scale(1.1);
     box-shadow: 0 0 15px var(--main-color);
 }
@@ -193,69 +191,78 @@ footer {
     padding: 25px;
     border-top: 3px solid var(--main-color);
     margin-top: 40px;
-    opacity: 0.9;
+    opacity: 0.8;
     font-size: 14px;
 }
 
-/* SLIDERS */
+/* CONTACT SLIDERS */
 .slider {
     position: fixed;
-    right: -300px;
-    top: 100px;
+    right: 20px;
+    bottom: 80px;
     width: 280px;
     background: #121212;
     border: 3px solid var(--main-color);
     border-radius: 12px;
     padding: 20px;
-    transition: right 0.5s;
+    transition: transform 0.5s ease, opacity 0.5s ease;
     z-index: 999;
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
 }
-.slider.open { right: 20px; }
-.slider h3 { color: var(--main-color); margin-bottom: 15px; text-align: center; }
-.slider a { display: block; background: var(--main-color); color: #000; text-align: center; padding: 10px 0; border-radius: 8px; margin-top: 10px; text-decoration: none; font-weight: bold; transition: 0.3s; }
+.slider.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+.slider h3 {
+    color: var(--main-color);
+    margin-bottom: 15px;
+    text-align: center;
+}
+.slider a {
+    display: block;
+    background: var(--main-color);
+    color: #000;
+    text-align: center;
+    padding: 10px 0;
+    border-radius: 8px;
+    margin-top: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
 .slider a:hover { background: #fff; }
 
 /* BUTTONS */
 #discordButton, #youtubeButton {
     position: fixed;
+    right: 20px;
     bottom: 20px;
-    width: 130px;
-    padding: 12px 10px;
+    background: #7289da;
+    color: #fff;
+    padding: 12px 18px;
     border-radius: 12px;
     font-weight: bold;
-    text-align: center;
-    color: #fff;
+    box-shadow: 0 0 10px #7289da;
+    text-decoration: none;
+    transition: 0.3s;
     cursor: pointer;
     z-index: 1000;
-    transition: 0.3s;
 }
-#discordButton { background: #7289da; right: 160px; box-shadow: 0 0 10px #7289da; }
-#youtubeButton { background: #FF0000; right: 20px; box-shadow: 0 0 10px #FF0000; }
-
-@media (max-width: 768px) {
-    #discordButton, #youtubeButton {
-        width: 45%;
-        right: auto;
-        bottom: 80px;
-    }
-    #discordButton { left: 4%; }
-    #youtubeButton { right: 4%; }
-}
+#youtubeButton { bottom: 70px; background: #ff0000; box-shadow: 0 0 10px #ff0000; }
+#discordButton:hover, #youtubeButton:hover { transform: scale(1.1); }
 
 /* MOBILE */
 @media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-        gap: 10px;
-        padding: 15px;
-        text-align: center;
-    }
-
+    nav { flex-direction: column; gap: 10px; padding: 15px; text-align: center; }
     nav div { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
     nav a, nav select { margin-left: 0; }
     section { padding: 30px 15px; }
     .code-card { flex-direction: column; align-items: flex-start; gap: 10px; }
-    button.copy-btn { width: 100%; }
+    button { width: 100%; }
+    #youtubeButton { bottom: 60px; }
 }
 </style>
 </head>
@@ -265,16 +272,15 @@ footer {
     <h1 id="logo">KuboomForum</h1>
     <div>
         <a href="#news" id="navNews">News</a>
-        <a href="#codes" id="navCodes">Promo Codes</a>
-        <a href="#weapons" id="navWeapons">Weapons</a>
+        <a href="#codes" id="navCodes">Codes</a>
+        <a href="#weaponsTab" id="weaponsTab">Weapons</a>
         <select id="languageSelect" onchange="setLanguage(this.value)">
             <option value="en">🇺🇸 English</option>
             <option value="es">🇪🇸 Español</option>
             <option value="ru">🇷🇺 Русский</option>
             <option value="hi">🇮🇳 Hindi</option>
             <option value="ur">🇵🇰 Urdu</option>
-            <option value="fr">🇫🇷 Français</option>
-            <option value="de">🇩🇪 Deutsch</option>
+            <option value="pt">🇵🇹 Português</option>
         </select>
         <select id="themeSelect" onchange="changeTheme(this.value)">
             <option value="green">🟢 Green</option>
@@ -297,54 +303,36 @@ footer {
 </section>
 
 <section id="codes">
-    <h3 class="section-title" id="codesTitle">Active Promo Codes</h3>
-    <div class="code-card"><div><div class="code">KUBOOM2026</div><div class="status active">STATUS: ACTIVE</div></div><button class="copy-btn" onclick="copyCode('KUBOOM2026')">Copy</button></div>
-    <div class="code-card"><div><div class="code">KUBOOM!</div><div class="status active">STATUS: ACTIVE</div></div><button class="copy-btn" onclick="copyCode('KUBOOM!')">Copy</button></div>
-    <div class="code-card"><div><div class="code">KUBOOM*</div><div class="status active">STATUS: ACTIVE</div></div><button class="copy-btn" onclick="copyCode('KUBOOM*')">Copy</button></div>
-    <div class="code-card"><div><div class="code">8YEARS</div><div class="status active">STATUS: ACTIVE</div></div><button class="copy-btn" onclick="copyCode('8YEARS')">Copy</button></div>
-
-    <h3 class="section-title">Expired Promo Codes</h3>
-    <div class="code-card"><div><div class="code">ALBATYA</div><div class="status expired">STATUS: EXPIRED</div></div></div>
-    <div class="code-card"><div><div class="code">RUTUL</div><div class="status expired">STATUS: EXPIRED</div></div></div>
-    <div class="code-card"><div><div class="code">PLSBXOU</div><div class="status expired">STATUS: EXPIRED</div></div></div>
+    <h3 class="section-title">Active Promo Codes</h3>
+    <div class="code-card"><div><div class="code">KUBOOM2026</div><div class="status active">STATUS: ACTIVE</div></div><button onclick="copyCode('KUBOOM2026')">Copy</button></div>
+    <div class="code-card"><div><div class="code">KUBOOM!</div><div class="status active">STATUS: ACTIVE</div></div><button onclick="copyCode('KUBOOM!')">Copy</button></div>
+    <div class="code-card"><div><div class="code">KUBOOM*</div><div class="status active">STATUS: ACTIVE</div></div><button onclick="copyCode('KUBOOM*')">Copy</button></div>
+    <!-- Expired codes at the bottom -->
+    <div class="code-card"><div><div class="code">ALBATYA</div><div class="status expired">STATUS: EXPIRED</div></div><button onclick="copyCode('ALBATYA')">Copy</button></div>
+    <div class="code-card"><div><div class="code">RUTUL</div><div class="status expired">STATUS: EXPIRED</div></div><button onclick="copyCode('RUTUL')">Copy</button></div>
+    <div class="code-card"><div><div class="code">PLSBXOU</div><div class="status expired">STATUS: EXPIRED</div></div><button onclick="copyCode('PLSBXOU')">Copy</button></div>
+    <div class="code-card"><div><div class="code">8YEARS</div><div class="status active">STATUS: ACTIVE</div></div><button onclick="copyCode('8YEARS')">Copy</button></div>
 </section>
 
-<section id="weapons">
-    <h3 class="section-title">Weapons Info</h3>
-    <div class="news-card">Coming soon! Go take a look 👀</div>
+<section id="weaponsTab">
+    <h3 class="section-title">Weapons</h3>
+    <div class="news-card">Coming Soon!</div>
 </section>
 
-<footer>
+<footer id="footerText">
     Made with ❤️ by errorkuboom
 </footer>
 
-<button id="discordButton" onclick="toggleSlider('discordSlider')">Join Discord</button>
-<button id="youtubeButton" onclick="toggleSlider('youtubeSlider')">My YouTube</button>
+<!-- Buttons -->
+<button id="discordButton" onclick="toggleSlider('discord')">Join Discord</button>
+<button id="youtubeButton" onclick="toggleSlider('youtube')">My YouTube</button>
 
-<div id="discordSlider" class="slider">
-    <h3>Discord</h3>
-    <a href="https://discord.gg/BhbsHkcS" target="_blank">Join Server</a>
-</div>
-
-<div id="youtubeSlider" class="slider">
-    <h3>YouTube</h3>
-    <a href="https://www.youtube.com/@3rrorKuboom" target="_blank">Visit Channel</a>
-</div>
+<!-- Sliders -->
+<div id="discordSlider" class="slider"><h3>Discord</h3><div>Discord: errorkuboom</div></div>
+<div id="youtubeSlider" class="slider"><h3>YouTube</h3><a href="https://www.youtube.com/@3rrorKuboom" target="_blank">🔥 My YouTube</a></div>
 
 <script>
-function copyCode(text){
-    navigator.clipboard.writeText(text);
-    alert("Copied code: " + text);
-}
-
-function toggleSlider(sliderId){
-    const sliders = ['discordSlider','youtubeSlider'];
-    sliders.forEach(id => {
-        const s = document.getElementById(id);
-        if(id === sliderId) s.classList.toggle('open');
-        else s.classList.remove('open');
-    });
-}
+function copyCode(text){navigator.clipboard.writeText(text); alert("Copied code: " + text);}
 
 function changeTheme(color){
     switch(color){
@@ -355,27 +343,41 @@ function changeTheme(color){
     }
 }
 
-const texts = {
-en:{navNews:"News",navCodes:"Promo Codes",navWeapons:"Weapons",header:"HOME",newsTitle:"Latest Kuboom News"},
-es:{navNews:"Noticias",navCodes:"Códigos Promocionales",navWeapons:"Armas",header:"INICIO",newsTitle:"Últimas Noticias de Kuboom"},
-ru:{navNews:"Новости",navCodes:"Промокоды",navWeapons:"Оружие",header:"ДОМОЙ",newsTitle:"Последние новости Kuboom"},
-hi:{navNews:"समाचार",navCodes:"प्रमो कोड",navWeapons:"हथियार",header:"मुखपृष्ठ",newsTitle:"हाल की Kuboom समाचार"},
-ur:{navNews:"خبریں",navCodes:"پرومو کوڈز",navWeapons:"ہتھیار",header:"ہوم",newsTitle:"تازہ ترین Kuboom خبریں"},
-fr:{navNews:"Actualités",navCodes:"Codes Promo",navWeapons:"Armes",header:"ACCUEIL",newsTitle:"Dernières nouvelles de Kuboom"},
-de:{navNews:"Neuigkeiten",navCodes:"Promo-Codes",navWeapons:"Waffen",header:"STARTSEITE",newsTitle:"Neueste Kuboom Nachrichten"}
+const texts={
+    en:{navNews:"News", navCodes:"Codes", navWeapons:"Weapons", header:"HOME", newsTitle:"Latest Kuboom News", news1:"🔥 Join Kuboom official server for help and report bugs", codesTitle:"Active Promo Codes", footer:"Made with ❤️ by errorkuboom", copyAlert:"Copied code: "},
+    es:{navNews:"Noticias", navCodes:"Códigos", navWeapons:"Armas", header:"INICIO", newsTitle:"Últimas Noticias de Kuboom", news1:"🔥 Únete al servidor oficial de Kuboom para ayuda y reportar errores", codesTitle:"Códigos Promocionales Activos", footer:"Hecho con ❤️ por errorkuboom", copyAlert:"Código copiado: "},
+    ru:{navNews:"Новости", navCodes:"Коды", navWeapons:"Оружие", header:"ДОМОЙ", newsTitle:"Последние новости Kuboom", news1:"🔥 Присоединяйтесь к официальному серверу Kuboom для помощи и отчетов об ошибках", codesTitle:"Активные промокоды", footer:"Сделано с ❤️ errorkuboom", copyAlert:"Скопировано: "},
+    hi:{navNews:"समाचार", navCodes:"कोड", navWeapons:"हथियार", header:"मुखपृष्ठ", newsTitle:"हाल की Kuboom समाचार", news1:"🔥 मदद और बग रिपोर्ट करने के लिए Kuboom आधिकारिक सर्वर में शामिल हों", codesTitle:"सक्रिय प्रोमो कोड", footer:"errorkuboom द्वारा ❤️ बनाया गया", copyAlert:"कोड कॉपी किया गया: "},
+    ur:{navNews:"خبریں", navCodes:"کوڈ", navWeapons:"ہتھیار", header:"ہوم", newsTitle:"تازہ ترین Kuboom خبریں", news1:"🔥 مدد اور بگ رپورٹ کرنے کے لیے Kuboom آفیشل سرور میں شامل ہوں", codesTitle:"فعال پرومو کوڈز", footer:"errorkuboom کی محبت سے بنایا گیا ❤️", copyAlert:"کوڈ نقل کیا گیا: "},
+    pt:{navNews:"Notícias", navCodes:"Códigos", navWeapons:"Armas", header:"INÍCIO", newsTitle:"Últimas notícias do Kuboom", news1:"🔥 Junte-se ao servidor oficial do Kuboom para ajuda e reportar bugs", codesTitle:"Códigos Promocionais Ativos", footer:"Feito com ❤️ por errorkuboom", copyAlert:"Código copiado: "}
 };
 
 function setLanguage(lang){
-    const t = texts[lang] || texts['en'];
-    document.getElementById('navNews').innerText = t.navNews;
-    document.getElementById('navCodes').innerText = t.navCodes;
-    document.getElementById('navWeapons').innerText = t.navWeapons;
-    document.getElementById('headerText').innerText = t.header;
-    document.getElementById('newsTitle').innerText = t.newsTitle;
+    const t=texts[lang];
+    document.getElementById('navNews').innerText=t.navNews;
+    document.getElementById('navCodes').innerText=t.navCodes;
+    document.getElementById('weaponsTab').innerText=t.navWeapons;
+    document.getElementById('headerText').innerText=t.header;
+    document.getElementById('newsTitle').innerText=t.newsTitle;
+    document.getElementById('news1').innerHTML=t.news1.replace(/(https?:\/\/[^\s]+)/g,'<a href="$1" target="_blank" style="color: var(--main-color); text-decoration: underline;">$1</a>');
+    document.getElementById('footerText').innerText=t.footer;
+    window.copyCode=function(text){navigator.clipboard.writeText(text); alert(t.copyAlert + text);}
 }
 
 setLanguage('en');
-</script>
 
+/* Slider toggle */
+function toggleSlider(type){
+    const discord = document.getElementById('discordSlider');
+    const youtube = document.getElementById('youtubeSlider');
+    if(type==='discord'){
+        discord.classList.toggle('open');
+        youtube.classList.remove('open');
+    } else {
+        youtube.classList.toggle('open');
+        discord.classList.remove('open');
+    }
+}
+</script>
 </body>
 </html>
