@@ -7,321 +7,127 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
 <style>
 :root {
-    --main-color: #00ff66; /* default green */
+    --main-color: #00ff66; 
     --dark: #0b0f0c;
     --card: #121a14;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Orbitron', sans-serif;
-}
-
-body {
-    background: radial-gradient(circle at top, #0b0f0c, #000);
-    color: #fff;
-    overflow-x: hidden;
-    perspective: 1000px;
-}
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Orbitron',sans-serif; }
+body { background: radial-gradient(circle at top, #0b0f0c, #000); color:#fff; overflow-x:hidden; perspective:1000px; }
 
 /* NAVBAR */
-nav {
-    background: rgba(15, 21, 17, 0.9);
-    padding: 15px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 3px solid var(--main-color);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-nav h1 {
-    color: var(--main-color);
-    text-shadow: 0 0 10px var(--main-color), 0 0 20px var(--main-color);
-    font-size: clamp(20px, 4vw, 36px);
-    transform: rotateY(0deg);
-    animation: slowSpin 12s infinite linear;
-    cursor: default;
-}
-
-@keyframes slowSpin {
-    0% { transform: rotateY(0deg); }
-    100% { transform: rotateY(360deg); }
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    margin-left: 20px;
-    transition: 0.3s;
-    position: relative;
-}
-nav a::after {
-    content: '';
-    display: block;
-    height: 2px;
-    background: var(--main-color);
-    transition: width 0.3s;
-    width: 0;
-}
-nav a:hover::after { width: 100%; }
-
-nav select, #themeSelect {
-    margin-left: 20px;
-    padding: 5px 10px;
-    border-radius: 5px;
-    border: none;
-    background: var(--main-color);
-    color: var(--dark);
-    font-weight: bold;
-    cursor: pointer;
-}
+nav { background: rgba(15,21,17,0.9); padding:15px 30px; display:flex; justify-content:space-between; align-items:center; border-bottom:3px solid var(--main-color); position:sticky; top:0; z-index:1000;}
+nav h1 { color:var(--main-color); text-shadow:0 0 10px var(--main-color),0 0 20px var(--main-color); font-size:clamp(20px,4vw,36px); transform: rotateY(0deg); animation:slowSpin 12s infinite linear; cursor:default;}
+@keyframes slowSpin {0% {transform:rotateY(0deg);}100% {transform:rotateY(360deg);}}
+nav a {color:white; text-decoration:none; margin-left:20px; transition:0.3s; position:relative;}
+nav a::after { content:''; display:block; height:2px; background:var(--main-color); transition:width 0.3s; width:0;}
+nav a:hover::after {width:100%;}
+nav select,#themeSelect {margin-left:20px; padding:5px 10px; border-radius:5px; border:none; background:var(--main-color); color:var(--dark); font-weight:bold; cursor:pointer;}
 
 /* HEADER */
-header {
-    height: 220px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 3px solid var(--main-color);
-    perspective: 800px;
-}
-
-header h2 {
-    font-size: clamp(28px, 8vw, 60px);
-    letter-spacing: 6px;
-    text-shadow: 0 0 15px var(--main-color), 0 0 30px var(--main-color);
-    transform: rotateX(0deg);
-    animation: pulse 2s infinite alternate;
-}
-
-@keyframes pulse {
-    0% { transform: rotateX(0deg) scale(1); }
-    50% { transform: rotateX(10deg) scale(1.05); }
-    100% { transform: rotateX(0deg) scale(1); }
-}
+header { height:220px; display:flex; align-items:center; justify-content:center; border-bottom:3px solid var(--main-color); perspective:800px;}
+header h2 { font-size:clamp(28px,8vw,60px); letter-spacing:6px; text-shadow:0 0 15px var(--main-color),0 0 30px var(--main-color); transform:rotateX(0deg); animation:pulse 2s infinite alternate;}
+@keyframes pulse {0%{transform:rotateX(0deg) scale(1);}50%{transform:rotateX(10deg) scale(1.05);}100%{transform:rotateX(0deg) scale(1);}}
 
 /* SECTIONS */
-section {
-    padding: 50px 20px;
-    max-width: 1100px;
-    margin: auto;
-}
-
-.section-title {
-    color: var(--main-color);
-    margin-bottom: 30px;
-    border-bottom: 3px solid var(--main-color);
-    padding-bottom: 5px;
-    text-shadow: 0 0 10px var(--main-color);
-    font-size: clamp(22px, 5vw, 36px);
-    cursor: pointer;
-    user-select: none;
-}
+section { padding:50px 20px; max-width:1100px; margin:auto;}
+.section-title { color:var(--main-color); margin-bottom:30px; border-bottom:3px solid var(--main-color); padding-bottom:5px; text-shadow:0 0 10px var(--main-color); font-size:clamp(22px,5vw,36px); cursor:pointer; user-select:none;}
 
 /* NEWS */
-.news-card {
-    background: var(--card);
-    padding: 25px;
-    margin-bottom: 20px;
-    border-left: 5px solid var(--main-color);
-    border-radius: 12px;
-    transition: all 0.4s ease;
-    transform-style: preserve-3d;
-}
-.news-card:hover {
-    transform: translateX(15px) rotateY(5deg) scale(1.03);
-    box-shadow: 0 0 20px var(--main-color);
-}
+.news-card { background:var(--card); padding:25px; margin-bottom:20px; border-left:5px solid var(--main-color); border-radius:12px; transition:all 0.4s ease; transform-style:preserve-3d;}
+.news-card:hover { transform: translateX(15px) rotateY(5deg) scale(1.03); box-shadow:0 0 20px var(--main-color); }
 
 /* CODES */
-.code-card {
-    background: var(--card);
-    padding: 25px;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 12px;
-    transition: transform 0.4s, box-shadow 0.4s;
-    cursor: pointer;
-    perspective: 500px;
-}
-.code-card:hover {
-    transform: translateY(-5px) rotateY(5deg) scale(1.02);
-    box-shadow: 0 0 20px var(--main-color);
-}
-
-.code {
-    font-size: 20px;
-    color: var(--main-color);
-    letter-spacing: 2px;
-    text-shadow: 0 0 10px var(--main-color);
-}
-
-.status {
-    font-size: 14px;
-    margin-top: 5px;
-}
-.status.active { color: #7CFFAA; text-shadow: 0 0 5px var(--main-color); }
-.status.expired { color: red; text-shadow: 0 0 5px red; }
-
-button {
-    background: var(--main-color);
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 8px;
-    font-weight: bold;
-    text-shadow: 0 0 5px var(--main-color);
-    transition: all 0.3s ease;
-}
-button:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 15px var(--main-color);
-}
+.code-card { background: var(--card); padding: 25px; margin-bottom:20px; display:flex; justify-content:space-between; align-items:center; border-radius:12px; transition:transform 0.4s, box-shadow 0.4s; cursor:pointer; perspective:500px;}
+.code-card:hover { transform: translateY(-5px) rotateY(5deg) scale(1.02); box-shadow:0 0 20px var(--main-color); }
+.code { font-size:20px; color:var(--main-color); letter-spacing:2px; text-shadow:0 0 10px var(--main-color);}
+.status { font-size:14px; margin-top:5px;}
+.status.active { color:#7CFFAA; text-shadow:0 0 5px var(--main-color);}
+.status.expired { color:red; text-shadow:0 0 5px red;}
+button { background: var(--main-color); border:none; padding:10px 20px; cursor:pointer; border-radius:8px; font-weight:bold; text-shadow:0 0 5px var(--main-color); transition: all 0.3s ease;}
+button:hover { transform:scale(1.1); box-shadow:0 0 15px var(--main-color);}
 
 /* FOOTER */
-footer {
-    text-align: center;
-    padding: 25px;
-    border-top: 3px solid var(--main-color);
-    margin-top: 40px;
-    opacity: 0.8;
-    font-size: 14px;
-}
+footer { text-align:center; padding:25px; border-top:3px solid var(--main-color); margin-top:40px; opacity:0.8; font-size:14px;}
 
-/* CONTACT SLIDERS */
-.slider {
-    position: fixed;
-    right: 20px;
-    bottom: 80px;
-    width: 280px;
-    background: #121212;
-    border: 3px solid var(--main-color);
-    border-radius: 12px;
-    padding: 20px;
-    transition: transform 0.5s ease, opacity 0.5s ease;
-    z-index: 999;
-    opacity: 0;
-    transform: translateY(20px);
-    pointer-events: none;
-}
-.slider.open {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-}
-.slider h3 {
-    color: var(--main-color);
-    margin-bottom: 15px;
-    text-align: center;
-}
-.slider a {
-    display: block;
-    background: var(--main-color);
-    color: #000;
-    text-align: center;
-    padding: 10px 0;
-    border-radius: 8px;
-    margin-top: 10px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
-}
-.slider a:hover { background: #fff; }
+/* SLIDERS */
+.slider { position:fixed; right:20px; width:200px; background:#121212; border:3px solid var(--main-color); border-radius:12px; padding:15px; transition: transform 0.4s, opacity 0.4s; z-index:999; opacity:0; transform:translateY(20px); pointer-events:none;}
+.slider.open { opacity:1; transform:translateY(0); pointer-events:auto;}
+.slider h3 { color: var(--main-color); margin-bottom:10px; text-align:center; font-size:16px;}
+.slider a { display:block; background: var(--main-color); color:#000; text-align:center; padding:8px 0; border-radius:8px; margin-top:10px; text-decoration:none; font-weight:bold; transition:0.3s; }
+.slider a:hover { background:#fff; }
 
 /* BUTTONS */
-#discordButton, #youtubeButton {
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    background: #7289da;
-    color: #fff;
-    padding: 12px 18px;
-    border-radius: 12px;
-    font-weight: bold;
-    box-shadow: 0 0 10px #7289da;
-    text-decoration: none;
-    transition: 0.3s;
-    cursor: pointer;
-    z-index: 1000;
-}
-#youtubeButton { bottom: 70px; background: #ff0000; box-shadow: 0 0 10px #ff0000; }
-#discordButton:hover, #youtubeButton:hover { transform: scale(1.1); }
+#discordButton, #youtubeButton { position:fixed; right:20px; width:120px; padding:10px; border-radius:12px; font-weight:bold; text-align:center; cursor:pointer; z-index:1000;}
+#discordButton { bottom:20px; background:#7289da; color:#fff; box-shadow:0 0 8px #7289da; }
+#youtubeButton { bottom:50px; background:#ff0000; color:#fff; box-shadow:0 0 8px #ff0000;}
+#discordButton:hover,#youtubeButton:hover{transform:scale(1.05);}
 
 /* MOBILE */
-@media (max-width: 768px) {
-    nav { flex-direction: column; gap: 10px; padding: 15px; text-align: center; }
-    nav div { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
-    nav a, nav select { margin-left: 0; }
-    section { padding: 30px 15px; }
-    .code-card { flex-direction: column; align-items: flex-start; gap: 10px; }
-    button { width: 100%; }
-    #youtubeButton { bottom: 60px; }
+@media (max-width:768px){
+    nav { flex-direction:column; gap:10px; padding:15px; text-align:center;}
+    nav div { display:flex; flex-wrap:wrap; justify-content:center; gap:10px;}
+    nav a,nav select{margin-left:0;}
+    section{padding:30px 15px;}
+    .code-card{flex-direction:column; align-items:flex-start; gap:10px;}
+    button{width:100%;}
+    #youtubeButton{bottom:50px;}
 }
 </style>
 </head>
 <body>
 
 <nav>
-    <h1 id="logo">KuboomForum</h1>
-    <div>
-        <a href="#news" id="navNews">News</a>
-        <a href="#codes" id="navCodes">Codes</a>
-        <a href="#weaponsTab" id="weaponsTab">Weapons</a>
-        <select id="languageSelect" onchange="setLanguage(this.value)">
-            <option value="en">🇺🇸 English</option>
-            <option value="es">🇪🇸 Español</option>
-            <option value="ru">🇷🇺 Русский</option>
-            <option value="hi">🇮🇳 Hindi</option>
-            <option value="ur">🇵🇰 Urdu</option>
-            <option value="pt">🇵🇹 Português</option>
-        </select>
-        <select id="themeSelect" onchange="changeTheme(this.value)">
-            <option value="green">🟢 Green</option>
-            <option value="red">🔴 Red</option>
-            <option value="blue">🔵 Blue</option>
-            <option value="yellow">🟡 Yellow</option>
-        </select>
-    </div>
+<h1 id="logo">KuboomForum</h1>
+<div>
+<a href="#news" id="navNews">News</a>
+<a href="#codes" id="navCodes">Codes</a>
+<a href="#weaponsTab" id="weaponsTab">Weapons</a>
+<select id="languageSelect" onchange="setLanguage(this.value)">
+<option value="en">🇺🇸 English</option>
+<option value="es">🇪🇸 Español</option>
+<option value="ru">🇷🇺 Русский</option>
+<option value="hi">🇮🇳 Hindi</option>
+<option value="ur">🇵🇰 Urdu</option>
+<option value="pt">🇵🇹 Português</option>
+</select>
+<select id="themeSelect" onchange="changeTheme(this.value)">
+<option value="green">🟢 Green</option>
+<option value="red">🔴 Red</option>
+<option value="blue">🔵 Blue</option>
+<option value="yellow">🟡 Yellow</option>
+</select>
+</div>
 </nav>
 
-<header>
-    <h2 id="headerText">HOME</h2>
-</header>
+<header><h2 id="headerText">HOME</h2></header>
 
 <section id="news">
-    <h3 class="section-title" id="newsTitle">Latest Kuboom News</h3>
-    <div class="news-card" id="news1">
-        🔥 <a href="https://discord.gg/BhbsHkcS" target="_blank" style="color: var(--main-color); text-decoration: underline;">Join Kuboom official server for help and report bugs</a>
-    </div>
+<h3 class="section-title" id="newsTitle">Latest Kuboom News</h3>
+<div class="news-card" id="news1">
+🔥 <a href="https://discord.gg/BhbsHkcS" target="_blank" style="color: var(--main-color); text-decoration: underline;">Join Kuboom official server for help and report bugs</a>
+</div>
 </section>
 
 <section id="codes">
-    <h3 class="section-title">Active Promo Codes</h3>
-    <div class="code-card"><div><div class="code">KUBOOM2026</div><div class="status active">STATUS: ACTIVE</div></div><button onclick="copyCode('KUBOOM2026')">Copy</button></div>
-    <div class="code-card"><div><div class="code">KUBOOM!</div><div class="status active">STATUS: ACTIVE</div></div><button onclick="copyCode('KUBOOM!')">Copy</button></div>
-    <div class="code-card"><div><div class="code">KUBOOM*</div><div class="status active">STATUS: ACTIVE</div></div><button onclick="copyCode('KUBOOM*')">Copy</button></div>
-    <!-- Expired codes at the bottom -->
-    <div class="code-card"><div><div class="code">ALBATYA</div><div class="status expired">STATUS: EXPIRED</div></div><button onclick="copyCode('ALBATYA')">Copy</button></div>
-    <div class="code-card"><div><div class="code">RUTUL</div><div class="status expired">STATUS: EXPIRED</div></div><button onclick="copyCode('RUTUL')">Copy</button></div>
-    <div class="code-card"><div><div class="code">PLSBXOU</div><div class="status expired">STATUS: EXPIRED</div></div><button onclick="copyCode('PLSBXOU')">Copy</button></div>
-    <div class="code-card"><div><div class="code">8YEARS</div><div class="status active">STATUS: ACTIVE</div></div><button onclick="copyCode('8YEARS')">Copy</button></div>
+<h3 class="section-title">Active Promo Codes</h3>
+<div class="code-card"><div><div class="code">KUBOOM2026</div><div class="status active">STATUS: ACTIVE</div></div><button onclick="copyCode('KUBOOM2026')">Copy</button></div>
+<div class="code-card"><div><div class="code">KUBOOM!</div><div class="status active">STATUS: ACTIVE</div></div><button onclick="copyCode('KUBOOM!')">Copy</button></div>
+<div class="code-card"><div><div class="code">KUBOOM*</div><div class="status active">STATUS: ACTIVE</div></div><button onclick="copyCode('KUBOOM*')">Copy</button></div>
+<div class="code-card"><div><div class="code">8YEARS</div><div class="status active">STATUS: ACTIVE</div></div><button onclick="copyCode('8YEARS')">Copy</button></div>
+
+<h3 class="section-title">Expired Codes</h3>
+<div class="code-card"><div><div class="code">ALBATYA</div><div class="status expired">STATUS: EXPIRED</div></div><button onclick="copyCode('ALBATYA')">Copy</button></div>
+<div class="code-card"><div><div class="code">RUTUL</div><div class="status expired">STATUS: EXPIRED</div></div><button onclick="copyCode('RUTUL')">Copy</button></div>
+<div class="code-card"><div><div class="code">PLSBXOU</div><div class="status expired">STATUS: EXPIRED</div></div><button onclick="copyCode('PLSBXOU')">Copy</button></div>
 </section>
 
 <section id="weaponsTab">
-    <h3 class="section-title">Weapons</h3>
-    <div class="news-card">Coming Soon!</div>
+<h3 class="section-title">Weapons</h3>
+<div class="news-card">Coming Soon!</div>
 </section>
 
-<footer id="footerText">
-    Made with ❤️ by errorkuboom
-</footer>
+<footer id="footerText">Made with ❤️ by errorkuboom</footer>
 
 <!-- Buttons -->
 <button id="discordButton" onclick="toggleSlider('discord')">Join Discord</button>
@@ -332,51 +138,26 @@ footer {
 <div id="youtubeSlider" class="slider"><h3>YouTube</h3><a href="https://www.youtube.com/@3rrorKuboom" target="_blank">🔥 My YouTube</a></div>
 
 <script>
-function copyCode(text){navigator.clipboard.writeText(text); alert("Copied code: " + text);}
-
-function changeTheme(color){
-    switch(color){
-        case "green": document.documentElement.style.setProperty('--main-color','#00ff66'); break;
-        case "red": document.documentElement.style.setProperty('--main-color','#ff4c4c'); break;
-        case "blue": document.documentElement.style.setProperty('--main-color','#4cafff'); break;
-        case "yellow": document.documentElement.style.setProperty('--main-color','#ffe74c'); break;
-    }
-}
+function copyCode(text){navigator.clipboard.writeText(text); alert("Copied code: "+text);}
+function changeTheme(color){switch(color){case"green":document.documentElement.style.setProperty('--main-color','#00ff66');break;case"red":document.documentElement.style.setProperty('--main-color','#ff4c4c');break;case"blue":document.documentElement.style.setProperty('--main-color','#4cafff');break;case"yellow":document.documentElement.style.setProperty('--main-color','#ffe74c');break;}}
 
 const texts={
-    en:{navNews:"News", navCodes:"Codes", navWeapons:"Weapons", header:"HOME", newsTitle:"Latest Kuboom News", news1:"🔥 Join Kuboom official server for help and report bugs", codesTitle:"Active Promo Codes", footer:"Made with ❤️ by errorkuboom", copyAlert:"Copied code: "},
-    es:{navNews:"Noticias", navCodes:"Códigos", navWeapons:"Armas", header:"INICIO", newsTitle:"Últimas Noticias de Kuboom", news1:"🔥 Únete al servidor oficial de Kuboom para ayuda y reportar errores", codesTitle:"Códigos Promocionales Activos", footer:"Hecho con ❤️ por errorkuboom", copyAlert:"Código copiado: "},
-    ru:{navNews:"Новости", navCodes:"Коды", navWeapons:"Оружие", header:"ДОМОЙ", newsTitle:"Последние новости Kuboom", news1:"🔥 Присоединяйтесь к официальному серверу Kuboom для помощи и отчетов об ошибках", codesTitle:"Активные промокоды", footer:"Сделано с ❤️ errorkuboom", copyAlert:"Скопировано: "},
-    hi:{navNews:"समाचार", navCodes:"कोड", navWeapons:"हथियार", header:"मुखपृष्ठ", newsTitle:"हाल की Kuboom समाचार", news1:"🔥 मदद और बग रिपोर्ट करने के लिए Kuboom आधिकारिक सर्वर में शामिल हों", codesTitle:"सक्रिय प्रोमो कोड", footer:"errorkuboom द्वारा ❤️ बनाया गया", copyAlert:"कोड कॉपी किया गया: "},
-    ur:{navNews:"خبریں", navCodes:"کوڈ", navWeapons:"ہتھیار", header:"ہوم", newsTitle:"تازہ ترین Kuboom خبریں", news1:"🔥 مدد اور بگ رپورٹ کرنے کے لیے Kuboom آفیشل سرور میں شامل ہوں", codesTitle:"فعال پرومو کوڈز", footer:"errorkuboom کی محبت سے بنایا گیا ❤️", copyAlert:"کوڈ نقل کیا گیا: "},
-    pt:{navNews:"Notícias", navCodes:"Códigos", navWeapons:"Armas", header:"INÍCIO", newsTitle:"Últimas notícias do Kuboom", news1:"🔥 Junte-se ao servidor oficial do Kuboom para ajuda e reportar bugs", codesTitle:"Códigos Promocionais Ativos", footer:"Feito com ❤️ por errorkuboom", copyAlert:"Código copiado: "}
+en:{navNews:"News", navCodes:"Codes", navWeapons:"Weapons", header:"HOME", newsTitle:"Latest Kuboom News", news1:"🔥 Join Kuboom official server for help and report bugs", footer:"Made with ❤️ by errorkuboom", copyAlert:"Copied code: "},
+es:{navNews:"Noticias", navCodes:"Códigos", navWeapons:"Armas", header:"INICIO", newsTitle:"Últimas Noticias de Kuboom", news1:"🔥 Únete al servidor oficial de Kuboom para ayuda y reportar errores", footer:"Hecho con ❤️ por errorkuboom", copyAlert:"Código copiado: "},
+ru:{navNews:"Новости", navCodes:"Коды", navWeapons:"Оружие", header:"ДОМОЙ", newsTitle:"Последние новости Kuboom", news1:"🔥 Присоединяйтесь к официальному серверу Kuboom для помощи и отчетов об ошибках", footer:"Сделано с ❤️ errorkuboom", copyAlert:"Скопировано: "},
+hi:{navNews:"समाचार", navCodes:"कोड", navWeapons:"हथियार", header:"मुखपृष्ठ", newsTitle:"हाल की Kuboom समाचार", news1:"🔥 मदद और बग रिपोर्ट करने के लिए Kuboom आधिकारिक सर्वर में शामिल हों", footer:"errorkuboom द्वारा ❤️ बनाया गया", copyAlert:"कोड कॉपी किया गया: "},
+ur:{navNews:"خبریں", navCodes:"کوڈ", navWeapons:"ہتھیار", header:"ہوم", newsTitle:"تازہ ترین Kuboom خبریں", news1:"🔥 مدد اور بگ رپورٹ کرنے کے لیے Kuboom آفیشل سرور میں شامل ہوں", footer:"errorkuboom کی محبت سے بنایا گیا ❤️", copyAlert:"کوڈ نقل کیا گیا: "},
+pt:{navNews:"Notícias", navCodes:"Códigos", navWeapons:"Armas", header:"INÍCIO", newsTitle:"Últimas notícias do Kuboom", news1:"🔥 Junte-se ao servidor oficial do Kuboom para ajuda e reportar bugs", footer:"Feito com ❤️ por errorkuboom", copyAlert:"Código copiado: "}
 };
 
-function setLanguage(lang){
-    const t=texts[lang];
-    document.getElementById('navNews').innerText=t.navNews;
-    document.getElementById('navCodes').innerText=t.navCodes;
-    document.getElementById('weaponsTab').innerText=t.navWeapons;
-    document.getElementById('headerText').innerText=t.header;
-    document.getElementById('newsTitle').innerText=t.newsTitle;
-    document.getElementById('news1').innerHTML=t.news1.replace(/(https?:\/\/[^\s]+)/g,'<a href="$1" target="_blank" style="color: var(--main-color); text-decoration: underline;">$1</a>');
-    document.getElementById('footerText').innerText=t.footer;
-    window.copyCode=function(text){navigator.clipboard.writeText(text); alert(t.copyAlert + text);}
-}
-
+function setLanguage(lang){const t=texts[lang]; document.getElementById('navNews').innerText=t.navNews; document.getElementById('navCodes').innerText=t.navCodes; document.getElementById('weaponsTab').innerText=t.navWeapons; document.getElementById('headerText').innerText=t.header; document.getElementById('newsTitle').innerText=t.newsTitle; document.getElementById('news1').innerHTML=t.news1.replace(/(https?:\/\/[^\s]+)/g,'<a href="$1" target="_blank" style="color: var(--main-color); text-decoration: underline;">$1</a>'); document.getElementById('footerText').innerText=t.footer; window.copyCode=function(text){navigator.clipboard.writeText(text); alert(t.copyAlert + text);}}
 setLanguage('en');
 
-/* Slider toggle */
 function toggleSlider(type){
     const discord = document.getElementById('discordSlider');
     const youtube = document.getElementById('youtubeSlider');
-    if(type==='discord'){
-        discord.classList.toggle('open');
-        youtube.classList.remove('open');
-    } else {
-        youtube.classList.toggle('open');
-        discord.classList.remove('open');
-    }
+    if(type==='discord'){discord.classList.toggle('open'); youtube.classList.remove('open');}
+    else {youtube.classList.toggle('open'); discord.classList.remove('open');}
 }
 </script>
 </body>
