@@ -1,180 +1,331 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <!-- THIS FIXES MOBILE ZOOM -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ErrorKuboomHub</title>
+<style>
+:root {
+  --green: #00ff66;
+  --dark: #0b0f0c;
+  --card: #121a14;
+}
 
-    <title>ErrorKuboomHub</title>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #0b0b0b;
-            color: white;
-        }
+body {
+  background: var(--dark);
+  color: white;
+}
 
-        header {
-            text-align: center;
-            padding: 20px;
-            background: #111;
-        }
+/* NAVBAR */
+nav {
+  background: #0f1511;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--green);
+}
 
-        h1 {
-            margin: 0;
-            color: #00aaff;
-        }
+nav h1 {
+  color: var(--green);
+}
 
-        section {
-            padding: 20px;
-        }
+nav div {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
 
-        .section-title {
-            text-align: center;
-            margin-bottom: 15px;
-            font-size: 22px;
-        }
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 20px;
+  transition: 0.3s;
+}
 
-        /* NEWS */
-        .news-card {
-            background: #151515;
-            border-radius: 12px;
-            padding: 15px;
-            margin: 15px auto;
-            max-width: 600px;
-            text-align: center;
-        }
+nav a:hover {
+  color: var(--green);
+}
 
-        .news-card img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
+nav select {
+  margin-left: 20px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  background: var(--green);
+  color: var(--dark);
+  font-weight: bold;
+  cursor: pointer;
+}
 
-        /* CODES */
-        .code-card {
-            background: #151515;
-            border-radius: 10px;
-            padding: 12px;
-            margin: 10px auto;
-            max-width: 600px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+/* HEADER */
+header {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 2px solid var(--green);
+}
 
-        .code {
-            font-weight: bold;
-            font-size: 18px;
-        }
+header h2 {
+  font-size: 6vw; /* responsive */
+  letter-spacing: 6px;
+}
 
-        .status {
-            font-size: 13px;
-            color: #00ff7f;
-        }
+/* SECTIONS */
+section {
+  padding: 40px;
+  max-width: 1100px;
+  margin: auto;
+}
 
-        button {
-            background: #00aaff;
-            color: black;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-        }
+.section-title {
+  color: var(--green);
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--green);
+  padding-bottom: 5px;
+}
 
-        button:hover {
-            background: #0088cc;
-        }
-    </style>
+/* NEWS */
+.news-card {
+  background: var(--card);
+  padding: 20px;
+  margin-bottom: 15px;
+  border-left: 4px solid var(--green);
+  transition: 0.3s;
+}
+
+.news-card:hover {
+  transform: translateX(8px);
+}
+
+/* CODES */
+.code-card {
+  background: var(--card);
+  padding: 20px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.3s;
+}
+
+.code-card:hover {
+  transform: scale(1.02);
+}
+
+.code-card div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.code {
+  font-size: 18px;
+  color: var(--green);
+  letter-spacing: 2px;
+}
+
+.status {
+  font-size: 14px;
+  color: #7CFFAA;
+}
+
+button {
+  background: var(--green);
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 20px;
+  border-top: 2px solid var(--green);
+  margin-top: 40px;
+  opacity: 0.7;
+}
+</style>
 </head>
-
 <body>
 
+<nav>
+  <h1>ErrorKuboomHub</h1>
+  <div>
+    <a href="#news" id="navNews">News</a>
+    <a href="#codes" id="navCodes">Codes</a>
+    <select id="languageSelect" onchange="setLanguage(this.value)">
+      <option value="en">English</option>
+      <option value="es">Español</option>
+      <option value="ru">Русский</option>
+      <option value="hi">हिंदी</option>
+    </select>
+  </div>
+</nav>
+
 <header>
-    <h1>ErrorKuboomHub</h1>
-    <p>Active Kuboom Promo Codes</p>
+  <h2 id="headerText">HOME</h2>
 </header>
 
-<!-- NEWS SECTION -->
 <section id="news">
-    <h2 class="section-title">Latest News</h2>
-
-    <div class="news-card">
-        <img src="news.png" alt="New Contracts">
-        <p>
-            • <strong>New contracts available!</strong><br>
-            For all devices: Android, Steam, App Store
-        </p>
-    </div>
+  <h3 class="section-title" id="newsTitle">Latest Kuboom News</h3>
+  <div class="news-card" id="news1">
+    🟢 Multiple active promo codes available right now!
+  </div>
+  <div class="news-card" id="news2">
+    🔥 Stay tuned for upcoming Kuboom updates.
+  </div>
 </section>
 
-<!-- CODES SECTION -->
 <section id="codes">
-    <h2 class="section-title">Active Codes</h2>
+  <h3 class="section-title" id="codesTitle">Active Promo Codes</h3>
 
-    <div class="code-card">
-        <div>
-            <div class="code">KUBOOM2026</div>
-            <div class="status">STATUS: ACTIVE</div>
-        </div>
-        <button onclick="copyCode('KUBOOM2026')">Copy</button>
+  <div class="code-card">
+    <div>
+      <div class="code">KUBOOM2026</div>
+      <div class="status">STATUS: ACTIVE</div>
     </div>
+    <button onclick="copyCode('KUBOOM2026')">Copy</button>
+  </div>
 
-    <div class="code-card">
-        <div>
-            <div class="code">KUBOOM!</div>
-            <div class="status">STATUS: ACTIVE</div>
-        </div>
-        <button onclick="copyCode('KUBOOM!')">Copy</button>
+  <div class="code-card">
+    <div>
+      <div class="code">KUBOOM!</div>
+      <div class="status">STATUS: ACTIVE</div>
     </div>
+    <button onclick="copyCode('KUBOOM!')">Copy</button>
+  </div>
 
-    <div class="code-card">
-        <div>
-            <div class="code">KUBOOM*</div>
-            <div class="status">STATUS: ACTIVE</div>
-        </div>
-        <button onclick="copyCode('KUBOOM*')">Copy</button>
+  <div class="code-card">
+    <div>
+      <div class="code">KUBOOM*</div>
+      <div class="status">STATUS: ACTIVE</div>
     </div>
+    <button onclick="copyCode('KUBOOM*')">Copy</button>
+  </div>
 
-    <div class="code-card">
-        <div>
-            <div class="code">ALBATYA</div>
-            <div class="status">STATUS: ACTIVE</div>
-        </div>
-        <button onclick="copyCode('ALBATYA')">Copy</button>
+  <div class="code-card">
+    <div>
+      <div class="code">ALBATYA</div>
+      <div class="status">STATUS: ACTIVE</div>
     </div>
+    <button onclick="copyCode('ALBATYA')">Copy</button>
+  </div>
 
-    <div class="code-card">
-        <div>
-            <div class="code">UPDATE</div>
-            <div class="status">STATUS: ACTIVE</div>
-        </div>
-        <button onclick="copyCode('UPDATE')">Copy</button>
+  <div class="code-card">
+    <div>
+      <div class="code">UPDATE</div>
+      <div class="status">STATUS: ACTIVE</div>
     </div>
+    <button onclick="copyCode('UPDATE')">Copy</button>
+  </div>
 
-    <div class="code-card">
-        <div>
-            <div class="code">UPDATE1</div>
-            <div class="status">STATUS: ACTIVE</div>
-        </div>
-        <button onclick="copyCode('UPDATE1')">Copy</button>
+  <div class="code-card">
+    <div>
+      <div class="code">UPDATE1</div>
+      <div class="status">STATUS: ACTIVE</div>
     </div>
+    <button onclick="copyCode('UPDATE1')">Copy</button>
+  </div>
 
-    <div class="code-card">
-        <div>
-            <div class="code">8YEARS</div>
-            <div class="status">STATUS: ACTIVE</div>
-        </div>
-        <button onclick="copyCode('8YEARS')">Copy</button>
+  <div class="code-card">
+    <div>
+      <div class="code">8YEARS</div>
+      <div class="status">STATUS: ACTIVE</div>
     </div>
+    <button onclick="copyCode('8YEARS')">Copy</button>
+  </div>
+
 </section>
+
+<footer id="footerText">
+  ErrorKuboomHub — Fan-made Kuboom website
+</footer>
 
 <script>
-    function copyCode(code) {
-        navigator.clipboard.writeText(code);
-        alert("Copied: " + code);
+// Default copy function
+function copyCode(text) {
+    const lang = document.getElementById('languageSelect').value;
+    navigator.clipboard.writeText(text);
+    alert(texts[lang].copyAlert + text);
+}
+
+// Language translations
+const texts = {
+    en: {
+        navNews: "News",
+        navCodes: "Codes",
+        header: "HOME",
+        newsTitle: "Latest Kuboom News",
+        news1: "🟢 Multiple active promo codes available right now!",
+        news2: "🔥 Stay tuned for upcoming Kuboom updates.",
+        codesTitle: "Active Promo Codes",
+        footer: "ErrorKuboomHub — Fan-made Kuboom website",
+        copyAlert: "Copied code: "
+    },
+    es: {
+        navNews: "Noticias",
+        navCodes: "Códigos",
+        header: "INICIO",
+        newsTitle: "Últimas Noticias de Kuboom",
+        news1: "🟢 ¡Múltiples códigos promocionales activos ahora mismo!",
+        news2: "🔥 Mantente atento a las próximas actualizaciones de Kuboom.",
+        codesTitle: "Códigos Promocionales Activos",
+        footer: "ErrorKuboomHub — Sitio de fans de Kuboom",
+        copyAlert: "Código copiado: "
+    },
+    ru: {
+        navNews: "Новости",
+        navCodes: "Коды",
+        header: "ДОМОЙ",
+        newsTitle: "Последние новости Kuboom",
+        news1: "🟢 Сейчас доступно несколько активных промокодов!",
+        news2: "🔥 Следите за предстоящими обновлениями Kuboom.",
+        codesTitle: "Активные промокоды",
+        footer: "ErrorKuboomHub — фан-сайт Kuboom",
+        copyAlert: "Скопировано: "
+    },
+    hi: {
+        navNews: "समाचार",
+        navCodes: "कोड",
+        header: "मुखपृष्ठ",
+        newsTitle: "हाल की Kuboom समाचार",
+        news1: "🟢 अभी कई सक्रिय प्रमो कोड उपलब्ध हैं!",
+        news2: "🔥 आगामी Kuboom अपडेट के लिए बने रहें।",
+        codesTitle: "सक्रिय प्रोमो कोड",
+        footer: "ErrorKuboomHub — फैन-निर्मित Kuboom वेबसाइट",
+        copyAlert: "कोड कॉपी किया गया: "
     }
+};
+
+// Function to set language
+function setLanguage(lang) {
+    document.getElementById('navNews').innerText = texts[lang].navNews;
+    document.getElementById('navCodes').innerText = texts[lang].navCodes;
+    document.getElementById('headerText').innerText = texts[lang].header;
+    document.getElementById('newsTitle').innerText = texts[lang].newsTitle;
+    document.getElementById('news1').innerText = texts[lang].news1;
+    document.getElementById('news2').innerText = texts[lang].news2;
+    document.getElementById('codesTitle').innerText = texts[lang].codesTitle;
+    document.getElementById('footerText').innerText = texts[lang].footer;
+}
+
+// Set default language to English
+setLanguage('en');
 </script>
 
 </body>
