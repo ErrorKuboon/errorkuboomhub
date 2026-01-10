@@ -48,10 +48,12 @@ nav {
     justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid var(--primary);
+    flex-wrap: wrap;
 }
 
 nav h1 {
     color: var(--primary);
+    margin-right: 10px;
 }
 
 nav a {
@@ -68,25 +70,16 @@ nav a:hover {
 nav .controls {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 nav select, nav button {
-    margin-left: 15px;
     padding: 5px 10px;
     border-radius: 5px;
     border: none;
     cursor: pointer;
     font-weight: bold;
-}
-
-nav select {
-    background: var(--primary);
-    color: var(--background);
-}
-
-nav button {
-    background: var(--button-bg);
-    color: var(--button-text);
 }
 
 /* SETTINGS ICON */
@@ -134,16 +127,18 @@ header {
     align-items: center;
     justify-content: center;
     border-bottom: 2px solid var(--primary);
+    padding: 20px;
 }
 
 header h2 {
     font-size: 48px;
     letter-spacing: 6px;
+    text-align: center;
 }
 
 /* SECTIONS */
 section {
-    padding: 40px;
+    padding: 20px;
     max-width: 1100px;
     margin: auto;
 }
@@ -155,46 +150,19 @@ section {
     padding-bottom: 5px;
 }
 
-/* NEWS */
-.news-card {
+/* NEWS & CODES CARDS */
+.news-card, .code-card {
     background: var(--card);
     padding: 20px;
     margin-bottom: 15px;
-    border-left: 4px solid var(--primary);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.news-card:hover {
-    transform: translateX(8px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-/* CODES */
-.code-card {
-    background: var(--card);
-    padding: 20px;
-    margin-bottom: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
 }
 
-.code-card:hover {
-    transform: scale(1.02);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-}
-
-.code {
-    font-size: 18px;
-    color: var(--primary);
-    letter-spacing: 2px;
-}
-
-.status {
-    font-size: 14px;
-    color: var(--primary);
+.news-card:hover, .code-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
 }
 
 /* COPY BUTTONS */
@@ -206,8 +174,6 @@ button.copy-btn {
     padding: 10px 18px;
     border: none;
     cursor: pointer;
-    position: relative;
-    overflow: hidden;
     transition: 0.3s;
 }
 
@@ -227,6 +193,7 @@ footer {
     justify-content: center;
     align-items: center;
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 footer img {
@@ -239,9 +206,26 @@ footer img:hover {
     transform: scale(1.2);
 }
 
-/* Add smooth theme changes */
-body, header, section, footer, nav {
-    transition: all 0.3s ease;
+/* RESPONSIVE MEDIA QUERY */
+@media screen and (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    nav .controls {
+        flex-direction: column;
+        width: 100%;
+    }
+    nav select, nav button {
+        width: 100%;
+        margin: 5px 0;
+    }
+    header h2 {
+        font-size: 36px;
+    }
+    section {
+        padding: 15px;
+    }
 }
 </style>
 </head>
@@ -276,73 +260,20 @@ body, header, section, footer, nav {
 <section id="news">
     <h3 class="section-title" id="newsTitle">Latest Kuboom News</h3>
 
-    <div class="news-card" id="news1">
-        🟢 Multiple active promo codes available right now!
-    </div>
-
-    <div class="news-card" id="news2">
-        🔥 Stay tuned for upcoming Kuboom updates.
-    </div>
+    <div class="news-card" id="news1">🟢 Multiple active promo codes available right now!</div>
+    <div class="news-card" id="news2">🔥 Stay tuned for upcoming Kuboom updates.</div>
 </section>
 
 <section id="codes">
     <h3 class="section-title" id="codesTitle">Active Promo Codes</h3>
 
-    <div class="code-card">
-        <div>
-            <div class="code">KUBOOM2026</div>
-            <div class="status">STATUS: ACTIVE</div>
-        </div>
-        <button class="copy-btn" onclick="copyCode('KUBOOM2026')">Copy</button>
-    </div>
-
-    <div class="code-card">
-        <div>
-            <div class="code">KUBOOM!</div>
-            <div class="status">STATUS: ACTIVE</div>
-        </div>
-        <button class="copy-btn" onclick="copyCode('KUBOOM!')">Copy</button>
-    </div>
-
-    <div class="code-card">
-        <div>
-            <div class="code">KUBOOM*</div>
-            <div class="status">STATUS: ACTIVE</div>
-        </div>
-        <button class="copy-btn" onclick="copyCode('KUBOOM*')">Copy</button>
-    </div>
-
-    <div class="code-card">
-        <div>
-            <div class="code">ALBATYA</div>
-            <div class="status">STATUS: ACTIVE</div>
-        </div>
-        <button class="copy-btn" onclick="copyCode('ALBATYA')">Copy</button>
-    </div>
-
-    <div class="code-card">
-        <div>
-            <div class="code">UPDATE</div>
-            <div class="status">STATUS: ACTIVE</div>
-        </div>
-        <button class="copy-btn" onclick="copyCode('UPDATE')">Copy</button>
-    </div>
-
-    <div class="code-card">
-        <div>
-            <div class="code">UPDATE1</div>
-            <div class="status">STATUS: ACTIVE</div>
-        </div>
-        <button class="copy-btn" onclick="copyCode('UPDATE1')">Copy</button>
-    </div>
-
-    <div class="code-card">
-        <div>
-            <div class="code">8YEARS</div>
-            <div class="status">STATUS: ACTIVE</div>
-        </div>
-        <button class="copy-btn" onclick="copyCode('8YEARS')">Copy</button>
-    </div>
+    <div class="code-card"><div><div class="code">KUBOOM2026</div><div class="status">STATUS: ACTIVE</div></div><button class="copy-btn" onclick="copyCode('KUBOOM2026')">Copy</button></div>
+    <div class="code-card"><div><div class="code">KUBOOM!</div><div class="status">STATUS: ACTIVE</div></div><button class="copy-btn" onclick="copyCode('KUBOOM!')">Copy</button></div>
+    <div class="code-card"><div><div class="code">KUBOOM*</div><div class="status">STATUS: ACTIVE</div></div><button class="copy-btn" onclick="copyCode('KUBOOM*')">Copy</button></div>
+    <div class="code-card"><div><div class="code">ALBATYA</div><div class="status">STATUS: ACTIVE</div></div><button class="copy-btn" onclick="copyCode('ALBATYA')">Copy</button></div>
+    <div class="code-card"><div><div class="code">UPDATE</div><div class="status">STATUS: ACTIVE</div></div><button class="copy-btn" onclick="copyCode('UPDATE')">Copy</button></div>
+    <div class="code-card"><div><div class="code">UPDATE1</div><div class="status">STATUS: ACTIVE</div></div><button class="copy-btn" onclick="copyCode('UPDATE1')">Copy</button></div>
+    <div class="code-card"><div><div class="code">8YEARS</div><div class="status">STATUS: ACTIVE</div></div><button class="copy-btn" onclick="copyCode('8YEARS')">Copy</button></div>
 </section>
 
 <footer id="footerText">
@@ -353,13 +284,11 @@ body, header, section, footer, nav {
 </footer>
 
 <script>
-// Copy code function
 function copyCode(text) {
     navigator.clipboard.writeText(text);
     alert("Copied code: " + text);
 }
 
-// Language translations
 const texts = {
     en: { navNews: "News", navCodes: "Codes", header: "HOME", newsTitle: "Latest Kuboom News", news1: "🟢 Multiple active promo codes available right now!", news2: "🔥 Stay tuned for upcoming Kuboom updates.", codesTitle: "Active Promo Codes", footer: "ErrorKuboomHub — Fan-made Kuboom website", copyAlert: "Copied code: " },
     es: { navNews: "Noticias", navCodes: "Códigos", header: "INICIO", newsTitle: "Últimas Noticias de Kuboom", news1: "🟢 ¡Múltiples códigos promocionales activos ahora mismo!", news2: "🔥 Mantente atento a las próximas actualizaciones de Kuboom.", codesTitle: "Códigos Promocionales Activos", footer: "ErrorKuboomHub — Sitio de fans de Kuboom", copyAlert: "Código copiado: " },
@@ -367,7 +296,6 @@ const texts = {
     hi: { navNews: "समाचार", navCodes: "कोड", header: "मुखपृष्ठ", newsTitle: "हाल की Kuboom समाचार", news1: "🟢 अभी कई सक्रिय प्रमो कोड उपलब्ध हैं!", news2: "🔥 आगामी Kuboom अपडेट के लिए बने रहें।", codesTitle: "सक्रिय प्रोमो कोड", footer: "ErrorKuboomHub — फैन-निर्मित Kuboom वेबसाइट", copyAlert: "कोड कॉपी किया गया: " }
 };
 
-// Set language
 function setLanguage(lang) {
     document.getElementById('navNews').innerText = texts[lang].navNews;
     document.getElementById('navCodes').innerText = texts[lang].navCodes;
@@ -383,7 +311,6 @@ function setLanguage(lang) {
     }
 }
 
-// Theme dropdown toggle
 function toggleDropdown() {
     const dd = document.getElementById('themeDropdown');
     dd.style.display = dd.style.display === 'block' ? 'none' : 'block';
@@ -398,7 +325,6 @@ function setTheme(theme) {
     toggleDropdown();
 }
 
-// Default language
 setLanguage('en');
 </script>
 
