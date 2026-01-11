@@ -2,203 +2,226 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KuboomForum</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+<title>ErrorKuboom - Official Fan Made Website</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <style>
-:root {
-    --main-color: #00ff66; 
-    --dark: #0b0f0c;
-    --card: #121a14;
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+/* ---------------- GENERAL ---------------- */
+* {margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron',sans-serif;}
+body {background:#000;color:white;overflow-x:hidden;scroll-behavior:smooth;}
+.hero, .section, footer {position: relative; z-index: 1;}
+
+/* ---------------- HERO ---------------- */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;}
+.hero h1{font-size:clamp(3rem,7vw,6rem);color:#00bfff;text-shadow:0 0 15px #00bfff,0 0 40px #00bfff;animation:float3d 4s ease-in-out infinite;}
+.hero h2{margin-top:15px;font-size:clamp(1.4rem,4vw,2.5rem);color:#1e90ff;text-shadow:0 0 12px #1e90ff,0 0 35px #1e90ff;animation:glow 2s infinite alternate;}
+.hero p{margin-top:25px;max-width:90%;opacity:0.9;line-height:1.5;font-size:1.1rem;}
+
+/* ---------------- BUTTONS ---------------- */
+.btn{display:inline-block;margin-top:15px;margin-right:15px;padding:15px 40px;border-radius:50px;background:linear-gradient(45deg,#00bfff,#1e90ff);color:black;font-weight:800;text-decoration:none;box-shadow:0 0 30px #00bfff;transition:0.3s;position:relative;overflow:hidden;}
+.btn::after{content:"";position:absolute;top:50%;left:50%;width:0;height:0;background:rgba(255,255,255,0.3);border-radius:50%;transform:translate(-50%,-50%);transition:0.6s;}
+.btn:active::after{width:300%;height:300%;opacity:0;}
+.btn:hover{transform:scale(1.1);box-shadow:0 0 60px #1e90ff;}
+
+/* ---------------- SECTIONS ---------------- */
+.section{padding:90px 20px;text-align:center;}
+.section h3{font-size:2.6rem;margin-bottom:40px;color:#00bfff;}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;max-width:1200px;margin:auto;}
+.card{background:rgba(255,255,255,0.05);border-radius:20px;padding:20px;backdrop-filter:blur(15px);box-shadow:0 0 30px rgba(0,191,255,0.2);transition:0.4s;overflow:hidden;position:relative;}
+.card:hover{transform:translateY(-12px) scale(1.04);box-shadow:0 0 60px rgba(30,144,255,0.6);}
+.video-wrap iframe{width:100%;border-radius:15px;border:none;}
+.video-wrap.short iframe{aspect-ratio:9/16;}
+
+/* Clickable overlay for shorts */
+.video-wrap.short a.overlay{position:absolute;inset:0;display:block;z-index:2;}
+
+/* ---------------- CODES MODAL ---------------- */
+#codesModal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);justify-content:center;align-items:center;z-index:9999;}
+#codesModal .modal-content{background:rgba(0,191,255,0.1);padding:30px;border-radius:20px;max-width:400px;max-height:80%;overflow-y:auto;backdrop-filter:blur(20px);}
+#codesModal .close-btn{float:right;font-size:1.5rem;font-weight:bold;cursor:pointer;color:#00bfff;}
+.code-btn{display:inline-block;margin:5px;padding:5px 10px;background:#00bfff;color:black;border-radius:8px;cursor:pointer;font-weight:bold;transition:0.2s;}
+.code-btn:hover{background:#1e90ff;}
+.expired-code{opacity:0.4;margin:5px;}
+
+/* ---------------- LANGUAGE SELECT ---------------- */
+.lang-select{margin-top:20px;padding:10px;border-radius:10px;background:rgba(0,0,0,0.2);color:white;font-weight:bold;}
+.lang-select option{background:#00111a;color:white;}
+
+/* ---------------- FOOTER ---------------- */
+footer{padding:40px;text-align:center;opacity:0.6;font-size:0.9rem;}
+
+/* ---------------- SCROLL ANIMATIONS ---------------- */
+[data-anim]{opacity:0;transition:opacity 0.9s ease,transform 0.9s ease;}
+[data-anim="up"]{transform:translateY(40px);}
+[data-anim="left"]{transform:translateX(-40px);}
+[data-anim="right"]{transform:translateX(40px);}
+[data-anim].show{opacity:1;transform:translate(0,0);}
+
+/* ---------------- ANIMATIONS ---------------- */
+@keyframes float3d{0%{transform:translateY(0);}50%{transform:translateY(-20px);}100%{transform:translateY(0);}}
+@keyframes glow{from{opacity:0.6;}to{opacity:1;}}
+
+@media(max-width:600px){
+  .hero h1{font-size:8vw;}
+  .hero h2{font-size:5vw;}
+  .hero p{font-size:4vw;line-height:1.5;}
+  .cards .card iframe{height:180px;}
 }
-* { margin:0; padding:0; box-sizing:border-box; font-family:'Orbitron',sans-serif; }
-body { background: radial-gradient(circle at top, #0b0f0c, #000); color:#fff; overflow-x:hidden; perspective:1000px; }
 
-/* NAVBAR */
-nav { background: rgba(15,21,17,0.9); padding:15px 20px; display:flex; justify-content:space-between; align-items:center; border-bottom:3px solid var(--main-color); position:sticky; top:0; z-index:1000;}
-nav h1 { color:var(--main-color); text-shadow:0 0 10px var(--main-color),0 0 20px var(--main-color); font-size:clamp(20px,4vw,36px); cursor:default;}
-nav a {color:white; text-decoration:none; margin-left:15px; transition:0.3s; position:relative;}
-nav a::after { content:''; display:block; height:2px; background:var(--main-color); transition:width 0.3s; width:0;}
-nav a:hover::after {width:100%;}
-nav select,#themeSelect {margin-left:10px; padding:5px 10px; border-radius:5px; border:none; background:var(--main-color); color:var(--dark); font-weight:bold; cursor:pointer;}
+/* ---------------- FUTURISTIC LINES BACKGROUND ---------------- */
+.futuristic-bg {position:fixed;inset:0;z-index:-1;}
+.line {position:absolute;width:2px;height:100%;background:linear-gradient(180deg,#00bfff,transparent);opacity:0.3;animation:slide 5s linear infinite;}
+@keyframes slide {0% {transform: translateY(-100%);}100% {transform: translateY(100%);}}
 
-/* HEADER */
-header { height:200px; display:flex; flex-direction:column; align-items:center; justify-content:center; border-bottom:3px solid var(--main-color); perspective:800px;}
-header h2 { font-size:clamp(28px,8vw,60px); letter-spacing:4px; text-shadow:0 0 15px var(--main-color),0 0 30px var(--main-color); margin-bottom:15px;}
-#tipsText { font-size:clamp(18px,5vw,28px); color:#fff; text-shadow:0 0 10px #ff4c4c,0 0 20px #ff4c4c; animation:slideTips 6s infinite alternate; margin-bottom:10px;}
-@keyframes slideTips {0%{transform:translateX(-100%);}50%{transform:translateX(50%);}100%{transform:translateX(-100%);}}
-
-/* SECTIONS */
-section { padding:40px 15px; max-width:1100px; margin:auto;}
-.section-title { color:var(--main-color); margin-bottom:25px; border-bottom:3px solid var(--main-color); padding-bottom:5px; text-shadow:0 0 10px var(--main-color); font-size:clamp(22px,5vw,32px); cursor:pointer; user-select:none;}
-
-/* NEWS */
-.news-card { background:var(--card); padding:20px; margin-bottom:15px; border-left:5px solid var(--main-color); border-radius:12px; transition:all 0.3s ease;}
-.news-card:hover { transform: translateX(5px); box-shadow:0 0 10px var(--main-color); }
-
-/* CODES */
-.code-card { background: var(--card); padding: 20px; margin-bottom:15px; display:flex; justify-content:space-between; align-items:center; border-radius:12px; transition:transform 0.3s, box-shadow 0.3s; cursor:pointer; perspective:500px;}
-.code-card:hover { transform: translateY(-3px); box-shadow:0 0 10px var(--main-color); }
-.code { font-size:18px; color:var(--main-color); letter-spacing:1px; text-shadow:0 0 5px var(--main-color);}
-.status { font-size:13px; margin-top:5px;}
-.status.active { color:#7CFFAA; text-shadow:0 0 3px var(--main-color);}
-.status.expired { color:red; text-shadow:0 0 3px red;}
-.code-card.expired { cursor:default; opacity:0.6;}
-button { background: var(--main-color); border:none; padding:8px 15px; cursor:pointer; border-radius:6px; font-weight:bold; text-shadow:0 0 3px var(--main-color); transition: all 0.3s ease;}
-button:hover { transform:scale(1.05); box-shadow:0 0 10px var(--main-color);}
-
-/* FOOTER */
-footer { text-align:center; padding:20px; border-top:3px solid var(--main-color); margin-top:30px; opacity:0.8; font-size:14px;}
-
-/* SLIDERS UNDER "COMING SOON!" */
-.slider { width:100%; max-width:250px; background:#121212; border:3px solid var(--main-color); border-radius:12px; padding:12px; margin-top:10px; transition: max-height 0.4s ease; overflow:hidden; max-height:0;}
-.slider.open { max-height:120px; }
-.slider h3 { color: var(--main-color); margin-bottom:10px; text-align:center; font-size:16px;}
-.slider a { display:block; background: var(--main-color); color:#000; text-align:center; padding:8px 0; border-radius:8px; margin-top:10px; text-decoration:none; font-weight:bold; transition:0.3s; }
-.slider a:hover { background:#fff; }
-
-/* BUTTONS */
-#discordButton, #youtubeButton { background:var(--main-color); color:#000; border:none; border-radius:10px; padding:8px 12px; font-weight:bold; cursor:pointer; margin-top:10px; display:inline-block;}
-#discordButton:hover,#youtubeButton:hover{transform:scale(1.05);}
-
-/* MOBILE */
-@media (max-width:768px){
-    nav { flex-direction:column; gap:10px; padding:15px; text-align:center;}
-    nav div { display:flex; flex-wrap:wrap; justify-content:center; gap:10px;}
-    nav a,nav select{margin-left:0;}
-    section{padding:25px 10px;}
-    .code-card{flex-direction:column; align-items:flex-start; gap:8px;}
-    button{width:100%;}
-    #discordButton,#youtubeButton{width:48%; margin-top:10px;}
-    #tipsText{font-size:18px;}
+/* ---------------- RGB Glow Animation for Achievements ---------------- */
+@keyframes rgbBorder {
+  0% { box-shadow: 0 0 15px red, 0 0 30px orange; }
+  25% { box-shadow: 0 0 15px yellow, 0 0 30px green; }
+  50% { box-shadow: 0 0 15px cyan, 0 0 30px blue; }
+  75% { box-shadow: 0 0 15px magenta, 0 0 30px purple; }
+  100% { box-shadow: 0 0 15px red, 0 0 30px orange; }
 }
+.rgb-glow { animation: rgbBorder 4s linear infinite; transition: transform 0.3s; }
+.rgb-glow:hover { transform: scale(1.02); }
 </style>
 </head>
 <body>
 
-<nav>
-<h1 id="logo">KuboomForum</h1>
-<div>
-<a href="#news" id="navNews">News</a>
-<a href="#codes" id="navCodes">Codes</a>
-<a href="#weaponsTab" id="weaponsTab">Weapons</a>
-<select id="languageSelect" onchange="setLanguage(this.value)">
-<option value="en">🇺🇸 English</option>
-<option value="es">🇪🇸 Español</option>
-<option value="ru">🇷🇺 Русский</option>
-<option value="hi">🇮🇳 Hindi</option>
-<option value="ur">🇵🇰 Urdu</option>
-<option value="pt">🇵🇹 Português</option>
-<option value="tr">🇹🇷 Türkçe</option>
-</select>
-<select id="themeSelect" onchange="changeTheme(this.value)">
-<option value="green">🟢 Green</option>
-<option value="red">🔴 Red</option>
-<option value="blue">🔵 Blue</option>
-<option value="yellow">🟡 Yellow</option>
-</select>
+<div class="futuristic-bg" id="futuristicBg"></div>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <h1 data-anim="up" id="heroTitle">ErrorKuboom</h1>
+    <h2 data-anim="up" id="heroSubtitle">Official Fan Made Website</h2>
+    <p data-anim="up" id="heroDesc">Welcome! Check my videos, shorts, and codes below.</p>
+    <a class="btn" data-anim="up" href="https://www.youtube.com/@3rrorKuboom" target="_blank" id="youtubeBtn">Visit YouTube</a>
+    <a class="btn" data-anim="up" id="openCodesBtn">CODES</a>
+    <br>
+    <select class="lang-select" id="langSwitcher"></select>
+  </div>
 </div>
-</nav>
 
-<header>
-<h2 id="headerText">HOME</h2>
-<div id="tipsText">TIPS → TRICKS → CODES</div>
-</header>
-
-<section id="news">
-<h3 class="section-title" id="newsTitle">Latest Kuboom News</h3>
-<div class="news-card" id="news1">
-🔥 <a href="https://discord.gg/BhbsHkcS" target="_blank" style="color: var(--main-color); text-decoration: underline;">Join Kuboom official server for help and report bugs</a>
+<!-- VIDEOS -->
+<div class="section">
+  <h3 data-anim="up" id="videosHeading">Some of My Amazing Videos</h3>
+  <div class="cards">
+    <div class="card" data-anim="left"><div class="video-wrap"><iframe src="https://www.youtube.com/embed/2GngdEHLOt8?start=8" allowfullscreen></iframe></div></div>
+    <div class="card" data-anim="up"><div class="video-wrap"><iframe src="https://www.youtube.com/embed/PJDCbVljDbk?start=36" allowfullscreen></iframe></div></div>
+    <div class="card" data-anim="right"><div class="video-wrap"><iframe src="https://www.youtube.com/embed/DfQ2rFEydRM?start=8" allowfullscreen></iframe></div></div>
+  </div>
 </div>
-</section>
 
-<section id="codes">
-<h3 class="section-title" id="activeCodesTitle">Active Promo Codes</h3>
-<div class="code-card"><div><div class="code">KUBOOM2026</div><div class="status active" id="status1">STATUS: ACTIVE</div></div><button onclick="copyCode('KUBOOM2026')" id="copy1">Copy</button></div>
-<div class="code-card"><div><div class="code">KUBOOM!</div><div class="status active" id="status2">STATUS: ACTIVE</div></div><button onclick="copyCode('KUBOOM!')" id="copy2">Copy</button></div>
-<div class="code-card"><div><div class="code">KUBOOM*</div><div class="status active" id="status3">STATUS: ACTIVE</div></div><button onclick="copyCode('KUBOOM*')" id="copy3">Copy</button></div>
-<div class="code-card"><div><div class="code">8YEARS</div><div class="status active" id="status4">STATUS: ACTIVE</div></div><button onclick="copyCode('8YEARS')" id="copy4">Copy</button></div>
-
-<h3 class="section-title" id="expiredCodesTitle">Expired Codes</h3>
-<div class="code-card expired"><div><div class="code">ALBATYA</div><div class="status expired" id="expired1">STATUS: EXPIRED</div></div></div>
-<div class="code-card expired"><div><div class="code">RUTUL</div><div class="status expired" id="expired2">STATUS: EXPIRED</div></div></div>
-<div class="code-card expired"><div><div class="code">PLSBXOU</div><div class="status expired" id="expired3">STATUS: EXPIRED</div></div></div>
-</section>
-
-<section id="weaponsTab">
-<h3 class="section-title" id="weaponsTitle">Weapons</h3>
-<div class="news-card" id="comingSoon">Coming Soon!</div>
-
-<div>
-<button id="discordButton" onclick="toggleSlider('discord')">Kuboom Official Discord Server</button>
-<button id="youtubeButton" onclick="toggleSlider('youtube')">My YouTube</button>
-<div id="discordSlider" class="slider"><h3>Discord</h3><a href="https://discord.gg/J9e3bBDs" target="_blank">🔥 Join Discord</a></div>
-<div id="youtubeSlider" class="slider"><h3>YouTube</h3><a href="https://www.youtube.com/@3rrorKuboom" target="_blank">🔥 My YouTube</a></div>
+<div class="section">
+  <h3 data-anim="up" id="shortsHeading">Most Popular Shorts</h3>
+  <div class="cards">
+    <div class="card" data-anim="left">
+      <div class="video-wrap short">
+        <iframe src="https://www.youtube.com/embed/7hRRBYheHKw" allowfullscreen></iframe>
+        <a class="overlay" href="https://www.youtube.com/shorts/7hRRBYheHKw" target="_blank"></a>
+      </div>
+    </div>
+    <div class="card" data-anim="up">
+      <div class="video-wrap short">
+        <iframe src="https://www.youtube.com/embed/6HgKVSaH1wg" allowfullscreen></iframe>
+        <a class="overlay" href="https://www.youtube.com/shorts/6HgKVSaH1wg" target="_blank"></a>
+      </div>
+    </div>
+    <div class="card" data-anim="right">
+      <div class="video-wrap short">
+        <iframe src="https://www.youtube.com/embed/-TikyhcvIb4" allowfullscreen></iframe>
+        <a class="overlay" href="https://www.youtube.com/shorts/-TikyhcvIb4" target="_blank"></a>
+      </div>
+    </div>
+  </div>
 </div>
-</section>
 
-<footer id="footerText">Made with ❤️ by errorkuboom</footer>
+<!-- ACHIEVEMENTS -->
+<div class="section">
+  <h3 data-anim="up" id="achievementsHeading">My Achievements:</h3>
+  <div class="card rgb-glow" data-anim="up" style="padding:20px;max-width:500px;margin:auto;text-align:center;line-height:1.6;font-size:1.2rem;border-radius:15px;" id="achievementsText">
+    Not yet YouTube Breloque and Title, maybe soon! 🔥
+  </div>
+</div>
+
+<!-- CODES MODAL -->
+<div id="codesModal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeCodes">&times;</span>
+    <h3>Active Codes</h3>
+    <div>
+      <span class="code-btn" onclick="copyCode('KUBOOM2026')">KUBOOM2026</span>
+      <span class="code-btn" onclick="copyCode('KUBOOM!')">KUBOOM!</span>
+      <span class="code-btn" onclick="copyCode('KUBOOM*')">KUBOOM*</span>
+    </div>
+    <h3 style="margin-top:20px;">Expired Codes</h3>
+    <div>
+      <span class="expired-code">ALBATYA</span>
+      <span class="expired-code">PLSBXOU</span>
+      <span class="expired-code">RUTUL</span>
+      <span class="expired-code">ALBATYA</span>
+    </div>
+  </div>
+</div>
+
+<footer data-anim="up">© 2026 ErrorKuboom — Official Fan Made Website</footer>
 
 <script>
-function copyCode(text){navigator.clipboard.writeText(text); alert("Copied code: "+text);}
-function changeTheme(color){switch(color){case"green":document.documentElement.style.setProperty('--main-color','#00ff66');break;case"red":document.documentElement.style.setProperty('--main-color','#ff4c4c');break;case"blue":document.documentElement.style.setProperty('--main-color','#4cafff');break;case"yellow":document.documentElement.style.setProperty('--main-color','#ffe74c');break;}}
+/* ---------------- SCROLL ANIMATIONS ---------------- */
+const items=document.querySelectorAll("[data-anim]");
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add("show"),i*60);
+    }
+  })
+},{threshold:0.2});
+items.forEach(el=>observer.observe(el));
 
-const texts={
-en:{navNews:"News", navCodes:"Codes", navWeapons:"Weapons", header:"HOME", tips:"TIPS → TRICKS → CODES",
-newsTitle:"Latest Kuboom News", news1:"🔥 Join Kuboom official server for help and report bugs",
-activeCodes:"Active Promo Codes", expiredCodes:"Expired Codes", comingSoon:"Coming Soon!", footer:"Made with ❤️ by errorkuboom", copyAlert:"Copied code: ", discordBtn:"Kuboom Official Discord Server", youtubeBtn:"My YouTube", statusActive:"STATUS: ACTIVE", statusExpired:"STATUS: EXPIRED"},
-es:{navNews:"Noticias", navCodes:"Códigos", navWeapons:"Armas", header:"INICIO", tips:"CONSEJOS → TRUCOS → CÓDIGOS",
-newsTitle:"Últimas Noticias de Kuboom", news1:"🔥 Únete al servidor oficial de Kuboom para ayuda y reportar errores",
-activeCodes:"Códigos Activos", expiredCodes:"Códigos Expirados", comingSoon:"Próximamente!", footer:"Hecho con ❤️ por errorkuboom", copyAlert:"Código copiado: ", discordBtn:"Servidor Oficial de Kuboom", youtubeBtn:"Mi YouTube", statusActive:"ESTADO: ACTIVO", statusExpired:"ESTADO: EXPIRADO"},
-ru:{navNews:"Новости", navCodes:"Коды", navWeapons:"Оружие", header:"ДОМОЙ", tips:"СОВЕТЫ → ПОДСКАЗКИ → КОДЫ",
-newsTitle:"Последние новости Kuboom", news1:"🔥 Присоединяйтесь к официальному серверу Kuboom для помощи и отчетов об ошибках",
-activeCodes:"Активные коды", expiredCodes:"Истекшие коды", comingSoon:"Скоро", footer:"Сделано с ❤️ errorkuboom", copyAlert:"Скопировано: ", discordBtn:"Официальный сервер Kuboom", youtubeBtn:"Мой YouTube", statusActive:"СТАТУС: АКТИВЕН", statusExpired:"СТАТУС: ИСТЕКЛО"},
-hi:{navNews:"समाचार", navCodes:"कोड", navWeapons:"हथियार", header:"मुखपृष्ठ", tips:"टिप्स → ट्रिक्स → कोड",
-newsTitle:"हाल की Kuboom समाचार", news1:"🔥 मदद और बग रिपोर्ट करने के लिए Kuboom आधिकारिक सर्वर में शामिल हों",
-activeCodes:"सक्रिय कोड", expiredCodes:"समाप्त कोड", comingSoon:"जल्द आ रहा है!", footer:"errorkuboom द्वारा ❤️ बनाया गया", copyAlert:"कोड कॉपी किया गया: ", discordBtn:"Kuboom आधिकारिक डिस्कॉर्ड", youtubeBtn:"मेरा YouTube", statusActive:"स्थिति: सक्रिय", statusExpired:"स्थिति: समाप्त"},
-ur:{navNews:"خبریں", navCodes:"کوڈ", navWeapons:"ہتھیار", header:"ہوم", tips:"مشورے → چالیں → کوڈز",
-newsTitle:"تازہ ترین Kuboom خبریں", news1:"🔥 مدد اور بگ رپورٹ کرنے کے لیے Kuboom آفیشل سرور میں شامل ہوں",
-activeCodes:"فعال کوڈ", expiredCodes:"میعاد ختم شدہ کوڈ", comingSoon:"جلد آ رہا ہے!", footer:"errorkuboom کی محبت سے بنایا گیا ❤️", copyAlert:"کوڈ نقل کیا گیا: ", discordBtn:"Kuboom آفیشل ڈسکارڈ", youtubeBtn:"میرا YouTube", statusActive:"حیثیت: فعال", statusExpired:"حیثیت: ختم شدہ"},
-pt:{navNews:"Notícias", navCodes:"Códigos", navWeapons:"Armas", header:"INÍCIO", tips:"DICAS → TRUQUES → CÓDIGOS",
-newsTitle:"Últimas notícias do Kuboom", news1:"🔥 Junte-se ao servidor oficial do Kuboom para ajuda e reportar bugs",
-activeCodes:"Códigos Ativos", expiredCodes:"Códigos Expirados", comingSoon:"Em Breve!", footer:"Feito com ❤️ por errorkuboom", copyAlert:"Código copiado: ", discordBtn:"Servidor Oficial Kuboom", youtubeBtn:"Meu YouTube", statusActive:"STATUS: ATIVO", statusExpired:"STATUS: EXPIRADO"},
-tr:{navNews:"Haberler", navCodes:"Kodlar", navWeapons:"Silahlar", header:"ANASAYFA", tips:"İPUÇLARI → HİLELER → KODLAR",
-newsTitle:"En Son Kuboom Haberleri", news1:"🔥 Yardım ve hataları bildirmek için Kuboom resmi sunucusuna katılın",
-activeCodes:"Aktif Kodlar", expiredCodes:"Süresi Dolmuş Kodlar", comingSoon:"Yakında!", footer:"errorkuboom tarafından ❤️ yapıldı", copyAlert:"Kod kopyalandı: ", discordBtn:"Kuboom Resmi Discord Sunucusu", youtubeBtn:"YouTube Kanalım", statusActive:"DURUM: AKTİF", statusExpired:"DURUM: SÜRE DOLDU"}
-};
-
-function setLanguage(lang){
-    const t=texts[lang]; 
-    document.getElementById('navNews').innerText=t.navNews; 
-    document.getElementById('navCodes').innerText=t.navCodes; 
-    document.getElementById('weaponsTab').innerText=t.navWeapons; 
-    document.getElementById('headerText').innerText=t.header; 
-    document.getElementById('tipsText').innerText=t.tips;
-    document.getElementById('newsTitle').innerText=t.newsTitle; 
-    document.getElementById('news1').innerHTML=t.news1.replace(/(https?:\/\/[^\s]+)/g,'<a href="$1" target="_blank" style="color: var(--main-color); text-decoration: underline;">$1</a>'); 
-    document.getElementById('activeCodesTitle').innerText=t.activeCodes;
-    document.getElementById('expiredCodesTitle').innerText=t.expiredCodes;
-    document.getElementById('weaponsTitle').innerText=t.navWeapons;
-    document.getElementById('comingSoon').innerText=t.comingSoon;
-    document.getElementById('footerText').innerText=t.footer;
-    document.getElementById('discordButton').innerText=t.discordBtn;
-    document.getElementById('youtubeButton').innerText=t.youtubeBtn;
-    document.getElementById('status1').innerText=t.statusActive;
-    document.getElementById('status2').innerText=t.statusActive;
-    document.getElementById('status3').innerText=t.statusActive;
-    document.getElementById('status4').innerText=t.statusActive;
-    document.getElementById('expired1').innerText=t.statusExpired;
-    document.getElementById('expired2').innerText=t.statusExpired;
-    document.getElementById('expired3').innerText=t.statusExpired;
-    window.copyCode=function(text){navigator.clipboard.writeText(text); alert(t.copyAlert + text);}
+/* ---------------- CODES MODAL ---------------- */
+const codesModal=document.getElementById("codesModal");
+document.getElementById("openCodesBtn").onclick=()=>{codesModal.style.display="flex";};
+document.getElementById("closeCodes").onclick=()=>{codesModal.style.display="none";};
+window.onclick=e=>{if(e.target==codesModal) codesModal.style.display="none";};
+function copyCode(code){
+  navigator.clipboard.writeText(code);
+  alert("Copied: "+code);
 }
-setLanguage('en');
 
-function toggleSlider(type){
-    const discord = document.getElementById('discordSlider');
-    const youtube = document.getElementById('youtubeSlider');
-    if(type==='discord'){discord.classList.toggle('open'); youtube.classList.remove('open');}
-    else {youtube.classList.toggle('open'); discord.classList.remove('open');}
+/* ---------------- LANGUAGE SWITCHER ---------------- */
+const langTexts={
+  ur:{heroDesc:"خوش آمدید! میرے ویڈیوز، شارجز اور کوڈز نیچے دیکھیں۔",youtubeBtn:"یوٹیوب دیکھیں",codesBtn:"کوڈز",videosHeading:"میرے شاندار ویڈیوز",shortsHeading:"مشہور شارٹس",achievementsHeading:"میری کامیابیاں:",achievementsText:"Not yet YouTube Breloque and Title, maybe soon! 🔥"},
+  hi:{heroDesc:"स्वागत है! मेरे वीडियो, शॉर्ट्स और कोड नीचे देखें।",youtubeBtn:"यूट्यूब देखें",codesBtn:"कोड्स",videosHeading:"मेरे शानदार वीडियो",shortsHeading:"लोकप्रिय शॉर्ट्स",achievementsHeading:"मेरी उपलब्धियाँ:",achievementsText:"Not yet YouTube Breloque and Title, maybe soon! 🔥"},
+  ru:{heroDesc:"Добро пожаловать! Смотрите мои видео, шорты и коды ниже.",youtubeBtn:"Посетить YouTube",codesBtn:"КОДЫ",videosHeading:"Мои потрясающие видео",shortsHeading:"Популярные шорты",achievementsHeading:"Мои достижения:",achievementsText:"Not yet YouTube Breloque and Title, maybe soon! 🔥"},
+  en:{heroDesc:"Welcome! Check my videos, shorts, and codes below.",youtubeBtn:"Visit YouTube",codesBtn:"CODES",videosHeading:"Some of My Amazing Videos",shortsHeading:"Most Popular Shorts",achievementsHeading:"My Achievements:",achievementsText:"Not yet YouTube Breloque and Title, maybe soon! 🔥"},
+  es:{heroDesc:"¡Bienvenido! Mira mis videos, shorts y códigos abajo.",youtubeBtn:"Visitar YouTube",codesBtn:"CÓDIGOS",videosHeading:"Algunos de Mis Videos Asombrosos",shortsHeading:"Shorts Más Populares",achievementsHeading:"Mis Logros:",achievementsText:"Not yet YouTube Breloque and Title, maybe soon! 🔥"},
+  pt:{heroDesc:"Bem-vindo! Confira meus vídeos, shorts e códigos abaixo.",youtubeBtn:"Visitar YouTube",codesBtn:"CÓDIGOS",videosHeading:"Alguns de Meus Vídeos Incríveis",shortsHeading:"Shorts Mais Populares",achievementsHeading:"Minhas Conquistas:",achievementsText:"Not yet YouTube Breloque and Title, maybe soon! 🔥"}
+};
+const langSwitcher=document.getElementById("langSwitcher");
+langSwitcher.innerHTML=Object.keys(langTexts).map(k=>`<option value="${k}">${k.toUpperCase()}</option>`).join("");
+langSwitcher.value="en";
+langSwitcher.addEventListener("change",(e)=>{
+  const l=langTexts[e.target.value];
+  if(l){
+    document.getElementById("heroDesc").textContent=l.heroDesc;
+    document.getElementById("youtubeBtn").textContent=l.youtubeBtn;
+    document.getElementById("openCodesBtn").textContent=l.codesBtn;
+    document.getElementById("videosHeading").textContent=l.videosHeading;
+    document.getElementById("shortsHeading").textContent=l.shortsHeading;
+    document.getElementById("achievementsHeading").textContent=l.achievementsHeading;
+    document.getElementById("achievementsText").textContent=l.achievementsText;
+  }
+});
+
+/* ---------------- FUTURISTIC BACKGROUND ---------------- */
+const bg=document.getElementById("futuristicBg");
+for(let i=0;i<50;i++){
+  const line=document.createElement("div");
+  line.classList.add("line");
+  line.style.left=`${Math.random()*100}%`;
+  line.style.animationDuration=`${3+Math.random()*5}s`;
+  bg.appendChild(line);
 }
 </script>
 </body>
