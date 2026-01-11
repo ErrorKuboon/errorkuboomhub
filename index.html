@@ -33,8 +33,30 @@ body {background:#000;color:white;overflow-x:hidden;scroll-behavior:smooth;}
 .video-wrap iframe{width:100%;border-radius:15px;border:none;}
 .video-wrap.short iframe{aspect-ratio:9/16;}
 
-/* Clickable overlay for shorts */
-.video-wrap.short a.overlay{position:absolute;inset:0;display:block;z-index:2;}
+/* Shorts overlay with text */
+.video-wrap.short a.overlay{
+  position:absolute;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:2;
+  color:white;
+  font-weight:bold;
+  font-size:1rem;
+  text-decoration:none;
+  background:rgba(0,0,0,0.3);
+  opacity:0;
+  transition:0.3s;
+  border-radius:15px;
+}
+.video-wrap.short:hover a.overlay{
+  opacity:1;
+  cursor:pointer;
+}
+.video-wrap.short a.overlay::after{
+  content:"Watch on YouTube ▶";
+}
 
 /* ---------------- CODES MODAL ---------------- */
 #codesModal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);justify-content:center;align-items:center;z-index:9999;}
@@ -59,8 +81,17 @@ footer{padding:40px;text-align:center;opacity:0.6;font-size:0.9rem;}
 [data-anim].show{opacity:1;transform:translate(0,0);}
 
 /* ---------------- ANIMATIONS ---------------- */
-@keyframes float3d{0%{transform:translateY(0);}50%{transform:translateY(-20px);}100%{transform:translateY(0);}}
+@keyframes float3d{0%{transform:translateY(0);}50%{transform:translateY(-20px);}100%{transform:translateY(0);} }
 @keyframes glow{from{opacity:0.6;}to{opacity:1;}}
+@keyframes rgbBorder {
+  0% { box-shadow: 0 0 15px red, 0 0 30px orange; }
+  25% { box-shadow: 0 0 15px yellow, 0 0 30px green; }
+  50% { box-shadow: 0 0 15px cyan, 0 0 30px blue; }
+  75% { box-shadow: 0 0 15px magenta, 0 0 30px purple; }
+  100% { box-shadow: 0 0 15px red, 0 0 30px orange; }
+}
+.rgb-glow { animation: rgbBorder 4s linear infinite; transition: transform 0.3s; }
+.rgb-glow:hover { transform: scale(1.02); }
 
 @media(max-width:600px){
   .hero h1{font-size:8vw;}
@@ -73,17 +104,6 @@ footer{padding:40px;text-align:center;opacity:0.6;font-size:0.9rem;}
 .futuristic-bg {position:fixed;inset:0;z-index:-1;}
 .line {position:absolute;width:2px;height:100%;background:linear-gradient(180deg,#00bfff,transparent);opacity:0.3;animation:slide 5s linear infinite;}
 @keyframes slide {0% {transform: translateY(-100%);}100% {transform: translateY(100%);}}
-
-/* ---------------- RGB Glow Animation for Achievements ---------------- */
-@keyframes rgbBorder {
-  0% { box-shadow: 0 0 15px red, 0 0 30px orange; }
-  25% { box-shadow: 0 0 15px yellow, 0 0 30px green; }
-  50% { box-shadow: 0 0 15px cyan, 0 0 30px blue; }
-  75% { box-shadow: 0 0 15px magenta, 0 0 30px purple; }
-  100% { box-shadow: 0 0 15px red, 0 0 30px orange; }
-}
-.rgb-glow { animation: rgbBorder 4s linear infinite; transition: transform 0.3s; }
-.rgb-glow:hover { transform: scale(1.02); }
 </style>
 </head>
 <body>
@@ -113,6 +133,7 @@ footer{padding:40px;text-align:center;opacity:0.6;font-size:0.9rem;}
   </div>
 </div>
 
+<!-- SHORTS -->
 <div class="section">
   <h3 data-anim="up" id="shortsHeading">Most Popular Shorts</h3>
   <div class="cards">
@@ -184,10 +205,7 @@ const codesModal=document.getElementById("codesModal");
 document.getElementById("openCodesBtn").onclick=()=>{codesModal.style.display="flex";};
 document.getElementById("closeCodes").onclick=()=>{codesModal.style.display="none";};
 window.onclick=e=>{if(e.target==codesModal) codesModal.style.display="none";};
-function copyCode(code){
-  navigator.clipboard.writeText(code);
-  alert("Copied: "+code);
-}
+function copyCode(code){navigator.clipboard.writeText(code);alert("Copied: "+code);}
 
 /* ---------------- LANGUAGE SWITCHER ---------------- */
 const langTexts={
@@ -198,9 +216,18 @@ const langTexts={
   es:{heroDesc:"¡Bienvenido! Mira mis videos, shorts y códigos abajo.",youtubeBtn:"Visitar YouTube",codesBtn:"CÓDIGOS",videosHeading:"Algunos de Mis Videos Asombrosos",shortsHeading:"Shorts Más Populares",achievementsHeading:"Mis Logros:",achievementsText:"Not yet YouTube Breloque and Title, maybe soon! 🔥"},
   pt:{heroDesc:"Bem-vindo! Confira meus vídeos, shorts e códigos abaixo.",youtubeBtn:"Visitar YouTube",codesBtn:"CÓDIGOS",videosHeading:"Alguns de Meus Vídeos Incríveis",shortsHeading:"Shorts Mais Populares",achievementsHeading:"Minhas Conquistas:",achievementsText:"Not yet YouTube Breloque and Title, maybe soon! 🔥"}
 };
+const langOptions = {
+  en: "English (English)",
+  hi: "हिन्दी (Hindi)",
+  ur: "اردو (Urdu)",
+  ru: "Русский (Russian)",
+  es: "Español (Spanish)",
+  pt: "Português (Portuguese)"
+};
 const langSwitcher=document.getElementById("langSwitcher");
-langSwitcher.innerHTML=Object.keys(langTexts).map(k=>`<option value="${k}">${k.toUpperCase()}</option>`).join("");
+langSwitcher.innerHTML = Object.keys(langOptions).map(k => `<option value="${k}">${langOptions[k]}</option>`).join("");
 langSwitcher.value="en";
+
 langSwitcher.addEventListener("change",(e)=>{
   const l=langTexts[e.target.value];
   if(l){
